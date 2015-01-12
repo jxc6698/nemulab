@@ -15,7 +15,6 @@ void reg_test() {
 	int i;
 	for(i = R_EAX; i <= R_EDI; i ++) {
 		sample[i] = rand();
-        printf("%x\n", sample[i]);
 		reg_l(i) = sample[i];
 		assert(reg_w(i) == (sample[i] & 0xffff));
 	}
@@ -30,7 +29,6 @@ void reg_test() {
 	assert(reg_b(R_DH) == ((sample[R_EDX] >> 8) & 0xff));
 
 	assert(sample[R_EAX] == cpu.eax);
-    printf("%x  %x\n",sample[R_ECX], cpu.ecx );
 	assert(sample[R_ECX] == cpu.ecx);
 	assert(sample[R_EDX] == cpu.edx);
 	assert(sample[R_EBX] == cpu.ebx);
