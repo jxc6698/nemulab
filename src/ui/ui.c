@@ -81,6 +81,11 @@ restart_:
 	cmd_c();
 }
 
+void step_n_ins(int n)
+{
+    return;
+}
+
 void main_loop() {
 	char *cmd;
 	while(1) {
@@ -92,6 +97,8 @@ void main_loop() {
 		if(strcmp(p, "c") == 0) { cmd_c(); }
 		else if(strcmp(p, "r") == 0) { cmd_r(); }
 		else if(strcmp(p, "q") == 0) { return; }
+        else if(strncmp(p, "si", 2) == 0) { printf("get si\n"); return; }
+
 
 		/* TODO: Add more commands */
 
