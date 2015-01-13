@@ -81,8 +81,9 @@ restart_:
 	cmd_c();
 }
 
-void step_n_ins(int n)
+void cmd_si(int n)
 {
+    printf(" step next %d\n", n);
     return;
 }
 
@@ -97,7 +98,10 @@ void main_loop() {
 		if(strcmp(p, "c") == 0) { cmd_c(); }
 		else if(strcmp(p, "r") == 0) { cmd_r(); }
 		else if(strcmp(p, "q") == 0) { return; }
-        else if(strncmp(p, "si", 2) == 0) { printf("get si\n"); return; }
+        else if(strncmp(p, "si", 2) == 0) { 
+            char *p=strtok(NULL, " ");
+            cmd_si((p==NULL)?1:atoi(p));
+        }
 
 
 		/* TODO: Add more commands */
