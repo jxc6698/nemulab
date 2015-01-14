@@ -84,6 +84,7 @@ restart_:
 void cmd_si(int n)
 {
     printf(" step next %d\n", n);
+    cpu_exec(n);
     return;
 }
 
