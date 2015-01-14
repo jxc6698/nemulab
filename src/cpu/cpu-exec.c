@@ -44,7 +44,7 @@ void cpu_exec(volatile uint32_t n) {
 	for(; n > 0; n --) {
 		swaddr_t eip_temp = cpu.eip;
 		int instr_len = exec(cpu.eip);
-        printf("-------\n");
+
 		cpu.eip += instr_len;
 
 		if(n_temp != -1 || (enable_debug && !quiet)) {
@@ -57,5 +57,6 @@ void cpu_exec(volatile uint32_t n) {
 			return;
 		} 
 		else if(nemu_state == END) { return; }
+        printf("n is %d\n", n);
 	}
 }
