@@ -83,8 +83,32 @@ restart_:
 
 void cmd_si(int n)
 {
-    printf(" step next %d\n", n);
     cpu_exec(n);
+    return;
+}
+
+/*  0: r register
+*   1: b breakpoint and watch
+*/
+void cmd_info(uint8_t type)
+{
+    switch(type) {
+    case 0:
+        printf("EAX %8x  ECX %8x\n", cpu.eax, cpu.ecx);
+        printf("EDX %8x  EBX %8x\n", cpu.edx, cpu.ebx);
+        printf("ESP %8x  EBP %8x\n", cpu.esp, cpu.ebp);
+        printf("ESI %8x  EDI %8x\n", cpu.esi, cpu.edi);
+        break;
+    case 1:
+        printf("info b \n");
+        break;
+    default:
+        break;
+    }
+}
+
+void cmd_p()
+{
     return;
 }
 
@@ -99,9 +123,11 @@ void main_loop() {
 		if(strcmp(p, "c") == 0) { cmd_c(); }
 		else if(strcmp(p, "r") == 0) { cmd_r(); }
 		else if(strcmp(p, "q") == 0) { return; }
-        else if(strncmp(p, "si", 2) == 0) { 
+        else if(strcmp(p, "si") == 0) { 
             char *p=strtok(NULL, " ");
             cmd_si((p==NULL)?1:atoi(p));
+        } else if (strcmp(p, "info") == 0) {
+            cmd_info(strtok(NULL, " ")[0] == 'r'?0:1 );
         }
 
 
