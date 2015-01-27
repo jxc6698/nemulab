@@ -24,6 +24,8 @@ void restart() {
 	memcpy(hwa_to_va(LOADER_START), loader, loader_len);
 
 	cpu.eip = LOADER_START;
+    cpu.eflags.val = 0x02;
+	cpu.esp = 0x100000;
 
 	init_dram();
 }
@@ -57,6 +59,5 @@ void cpu_exec(volatile uint32_t n) {
 			return;
 		} 
 		else if(nemu_state == END) { return; }
-        printf("n is %d\n", n);
 	}
 }

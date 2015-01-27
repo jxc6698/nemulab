@@ -1,4 +1,5 @@
 #include "ui/ui.h"
+#include "ui/breakpoint.h"
 
 #include "nemu.h"
 
@@ -6,6 +7,8 @@
 #include <stdlib.h>
 #include <readline/readline.h>
 #include <readline/history.h>
+
+uint32_t expr(char *e, bool *success);
 
 int nemu_state = END;
 
@@ -83,6 +86,11 @@ restart_:
 
 void cmd_si(int n)
 {
+    if(nemu_state == END) {
+        restart();
+        nemu_state = STOP;
+	}
+
     cpu_exec(n);
     return;
 }
@@ -107,9 +115,36 @@ void cmd_info(uint8_t type)
     }
 }
 
-void cmd_p()
+void cmd_p( uint32_t addr)
 {
+    printf("addr %x\n", addr);
     return;
+}
+
+void cmd_x(int n, uint32_t addr) 
+{
+    int i;
+    printf("n: %d   addr 0x%x\n", n, addr);
+    for (i=0;i<n;i++) {
+        printf("0x%8x  ", swaddr_read(addr+i*4, 4));
+        if(i%4==4-1&&i) {
+            printf("\n");
+        }
+    }
+    if (n%4 != 3)
+        printf("\n");
+    return;
+}
+
+void cmd_b(uint32_t addr)
+{
+   // need to judge whether has the same breakpoint 
+    add_bp(addr);
+}
+
+void cmd_d(uint32_t addr)
+{   
+    del_bp(addr);
 }
 
 void main_loop() {
@@ -128,7 +163,32 @@ void main_loop() {
             cmd_si((p==NULL)?1:atoi(p));
         } else if (strcmp(p, "info") == 0) {
             cmd_info(strtok(NULL, " ")[0] == 'r'?0:1 );
+        } else if (strcmp(p, "p") == 0) {
+            bool success;
+            cmd_p(expr(strtok(NULL, " "), &success));
+        } else if (strcmp(p, "x") == 0) {
+            char *tmp = strtok(NULL, " ");
+            char *tmp1 = tmp+strlen(tmp)+1;
+            bool success;
+            cmd_x(atoi(tmp), expr(tmp1, &success));
+        } else if (strcmp(p, "b") == 0) {
+            char *tmp = strtok(NULL, " ");
+            if (tmp[0] == '*') {
+                cmd_b(0);
+            } else {
+                // query symbol table 
+                ;
+            }
+        } else if (strcmp(p, "d") == 0) {
+            char *tmp = strtok(NULL, " ");
+            if (tmp[0] == '*') {
+                cmd_d(0);
+            } else {
+                // query symbol table 
+                ;
+            }
         }
+
 
 
 		/* TODO: Add more commands */
