@@ -58,8 +58,10 @@ typedef struct {
 			uint8_t Vm		:1;
 			uint32_t unused5:13;
 		};
-		swaddr_t val;
+		uint32_t val;
+		uint16_t flags;
 	} eflags;
+
 	swaddr_t eip;
 } CPU_state;
 
@@ -76,6 +78,12 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
 extern const char* regsl[];
 extern const char* regsw[];
 extern const char* regsb[];
+
+#define set_eflags(cpu, value) (cpu.eflags.val = value);
+#define set_flags(cpu, value) (cpu.eflags.flags = value)
+
+#define get_eflags(cpu) (cpu.eflags.val)
+#define get_flags(cpu) (cpu.eflags.flags)
 
 #define test_cf(cpu) (cpu.eflags.Cf)
 #define test_pf(cpu) (cpu.eflags.Pf)

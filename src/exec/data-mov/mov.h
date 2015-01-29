@@ -15,4 +15,10 @@ make_helper(mov_rm2r_v);
 make_helper(mov_a2moffs_v);
 make_helper(mov_moffs2a_v);
 
+make_helper(movsx_rmb2rv);
+make_helper(movsx_rmw2rl);
+
+make_helper(movzx_rmb2rv);
+make_helper(movzx_rmw2rl);
+
 #endif

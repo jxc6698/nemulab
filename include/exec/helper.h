@@ -3,6 +3,7 @@
 
 #include "cpu/reg.h"
 #include "memory.h"
+#include "exec/eflags-help.h"
 
 /* All function defined with 'make_helper' return the length of the instruction. */
 #define make_helper(name) int name(swaddr_t eip)

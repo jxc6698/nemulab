@@ -10,6 +10,11 @@ make_helper(push_cs);
 make_helper(push_ss);
 make_helper(push_ds);
 make_helper(push_es);
-make_helper(push_fs_gs);
+make_helper(push_fs);
+make_helper(push_gs);
+
+make_helper(push_av);
+
+make_helper(push_fv);
 
 #endif

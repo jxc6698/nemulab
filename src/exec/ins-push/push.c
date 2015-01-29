@@ -12,6 +12,7 @@ make_helper(push_mw)
 	assert(m.opcode==6);
 
 	int len = read_ModR_M(eip+1, &addr); 
+	cpu.esp -= 2;
 	swaddr_write(cpu.esp, 2, swaddr_read(addr, 2));
 
 	return len+1;
@@ -25,6 +26,7 @@ make_helper(push_ml)
 	assert(m.opcode==6);
 
 	int len = read_ModR_M(eip+1, &addr); 
+	cpu.esp -= 4;
 	swaddr_write(cpu.esp, 4, swaddr_read(addr, 4));
 
 	return len+1;
@@ -114,16 +116,72 @@ make_helper(push_es)
 	return 1;
 }
 
-make_helper(push_fs_gs)
+make_helper(push_fs)
 {
 	assert(0);
 	uint8_t op = instr_fetch(eip+1, 1);
 	if (op==0xa0) {
 		;
-	} else if ( op == 0xa8 ) {
+	} else 
+		assert(0);
+	return 2;
+}
+
+make_helper(push_gs)
+{
+	assert(0);
+	uint8_t op = instr_fetch(eip+1, 1);
+	if ( op == 0xa8 ) {
 		;
 	} else
 		assert(0);
-	
 	return 2;
 }
+
+make_helper(push_a)
+{
+	/* UNFIXED: address should be [ss:esp] */
+	int i;
+	for (i=0;i<8;i++) {
+		cpu.esp -= 2;
+		swaddr_write(cpu.esp, 2, reg_w(i));
+	}
+
+	return 1;
+}
+
+make_helper(push_ad)
+{
+	int i;
+	for (i=0;i<8;i++) {
+		cpu.esp -= 4;
+		swaddr_write(cpu.esp, 4, reg_l(i));
+	}
+	return 1;
+}
+
+make_helper(push_av)
+{
+	return suffix=='l'?push_ad(eip):push_a(eip);
+}
+
+make_helper(push_f)
+{
+	cpu.esp -= 2;
+	swaddr_write(cpu.esp, 2, get_flags(cpu));
+	return 1;
+}
+
+make_helper(push_fd)
+{
+	cpu.esp -= 4;
+	swaddr_write(cpu.esp, 4, get_eflags(cpu));
+	return 1;
+}
+
+make_helper(push_fv)
+{
+	return suffix=='l'?push_fd(eip):push_f(eip);
+}
+
+

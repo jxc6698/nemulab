@@ -8,37 +8,9 @@
 
 extern char suffix;
 
-/* affect of, sf, zf, af, pf, cf */
-#define aaa aaa
-
-typedef union{
-	uint32_t unsign32;
-	int32_t sign32;
-	uint16_t unsign16;
-	int16_t sign16;
-	uint8_t unsign8;
-	int8_t sign8;
-} cmp_help_s;
-/*	use cmp_help_s val1, val2:
-*	val1: left operand. val2: right operand
-*/
-
-extern uint8_t pf_flag[];
-
-
-#define cmp_ch_eflags(cpu, BITS, offset)						\
-	result.sign##BITS = val1.sign##BITS - val2.sign##BITS;					\
-	(val1.unsign##BITS<val2.unsign##BITS)? set_cf(cpu): clear_pf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
-	((result.unsign##BITS&0x0f)>=(val1.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);																\
-	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
-	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
-	((result.sign##BITS^val1.sign##BITS)&(1<<(offset-1)))&&((val2.sign##BITS^val1.sign##BITS)&(1<<(offset-1)))? set_of(cpu): clear_of(cpu);
-	
-
 make_helper(cmp_al2ib)
 {
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	val1.unsign8 = reg_b(R_AL);
 	val2.unsign8 = instr_fetch(eip+1, 1);
 	result.sign8 = val1.sign8 - val2.sign8;
@@ -49,7 +21,7 @@ make_helper(cmp_al2ib)
 
 make_helper(cmp_ax2iw)
 {
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	val1.unsign16 = reg_w(R_AX);
 	val2.unsign16 = instr_fetch(eip+1, 2);
 	result.sign16 = val1.sign16 - val2.sign16;
@@ -60,7 +32,7 @@ make_helper(cmp_ax2iw)
 
 make_helper(cmp_eax2il)
 {
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	val1.unsign32 = reg_l(R_EAX);
 	val2.unsign32 = instr_fetch(eip+1, 4);
 	result.sign32 = val1.sign32 - val2.sign32;
@@ -78,7 +50,7 @@ make_helper(cmp_rmb2ib)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	assert(m.reg == 7);
@@ -106,7 +78,7 @@ make_helper(cmp_rmw2iw)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	assert(m.reg == 7);
@@ -135,7 +107,7 @@ make_helper(cmp_rml2il)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	assert(m.reg == 7);
@@ -168,7 +140,7 @@ make_helper(cmp_rmw2ib)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	assert(m.reg == 7);
@@ -198,7 +170,7 @@ make_helper(cmp_rml2ib)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	assert(m.reg == 7);
@@ -233,7 +205,7 @@ make_helper(cmp_rmb2rb)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
@@ -260,7 +232,7 @@ make_helper(cmp_rmw2rw)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
@@ -287,7 +259,7 @@ make_helper(cmp_rml2rl)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
@@ -319,7 +291,7 @@ make_helper(cmp_rb2rmb)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
@@ -346,7 +318,7 @@ make_helper(cmp_rw2rmw)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
@@ -373,7 +345,7 @@ make_helper(cmp_rl2rml)
 {
 	int insLen = 1;
 	ModR_M m;
-	cmp_help_s val1, val2, result;
+	eflags_help_s val1, val2, result;
 	
 	m.val = instr_fetch(eip+1, 1);
 	if (m.mod == 3) {
