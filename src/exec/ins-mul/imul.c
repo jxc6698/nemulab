@@ -205,7 +205,7 @@ make_helper(imul_rmlib2rl)
 	}
 }
 
-make_helper(imal_rmvib2rv)
+make_helper(imul_rmvib2rv)
 {
 	return suffix=='l'?imul_rmlib2rl(eip):imul_rmwib2rw(eip);
 }
@@ -297,7 +297,7 @@ make_helper(imul_rmlil2rl)
 	}
 }
 
-make_helper(imal_rmviv2rv)
+make_helper(imul_rmviv2rv)
 {
 	return suffix=='l'?imul_rmlil2rl(eip):imul_rmwiw2rw(eip);
 }

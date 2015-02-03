@@ -118,5 +118,16 @@ extern const char* regsb[];
 /* no used in current NEMU*/
 #define clear_af(cpu) (cpu.eflags.Af = 0)
 
+#define get_cf(cpu) (cpu.eflags.Cf)
+#define get_pf(cpu) (cpu.eflags.Pf)
+#define get_zf(cpu) (cpu.eflags.Zf)
+#define get_sf(cpu) (cpu.eflags.Sf)
+#define get_if(cpu) (cpu.eflags.If)
+#define get_df(cpu) (cpu.eflags.Df)
+#define get_of(cpu) (cpu.eflags.Of)
+
+/* no used in current NEMU*/
+#define get_af(cpu) (cpu.eflags.Af)
+
 
 #endif

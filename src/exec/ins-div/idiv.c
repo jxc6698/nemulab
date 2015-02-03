@@ -3,10 +3,11 @@
 #include "cpu/modrm.h"
 
 #include "exec/eflags-help.h"
+#include "cpu/interrupt.h"
 
 extern char suffix;
 
-make_helper(idiv_rmb2ax)
+make_helper(idiv_rmb2al)
 {
 	ModR_M m;
 	eflags_help_s val1, val2, result;
@@ -18,6 +19,9 @@ make_helper(idiv_rmb2ax)
 		reg_b(R_AH) = val1.unsign8;
 		reg_b(R_AL) = result.unsign8;
 
+		if (result.sign8 != result.sign16)
+			set_interrupt(0);
+
 		return 2;
 	} else {
 		swaddr_t addr;
@@ -27,6 +31,9 @@ make_helper(idiv_rmb2ax)
 		idiv_ch_eflags(cpu, 16, 8);
 		reg_b(R_AH) = val1.unsign8;
 		reg_b(R_AL) = result.unsign8;
+
+		if (result.sign8 != result.sign16)
+			set_interrupt(0);
 
 		return 1+len;
 	}
@@ -44,6 +51,9 @@ make_helper(idiv_rmw2ax)
 		reg_w(R_DX) = val1.unsign16;
 		reg_w(R_AX) = result.unsign16;
 
+		if (result.sign16 != result.sign32)
+			set_interrupt(0);
+
 		return 2;
 	} else {
 		swaddr_t addr;
@@ -53,6 +63,9 @@ make_helper(idiv_rmw2ax)
 		idiv_ch_eflags(cpu, 32, 16);
 		reg_w(R_DX) = val1.unsign16;
 		reg_w(R_AX) = result.unsign16;
+
+		if (result.sign16 != result.sign32)
+			set_interrupt(0);
 
 		return 1+len;
 	}
@@ -72,6 +85,9 @@ make_helper(idiv_rml2eax)
 		reg_l(R_EDX) = val1.unsign32;
 		reg_l(R_EAX) = result.unsign32;
 
+		if (result.sign32 != result.sign64)
+			set_interrupt(0);
+
 		return 2;
 	} else {
 		swaddr_t addr;
@@ -83,6 +99,9 @@ make_helper(idiv_rml2eax)
 		idiv_ch_eflags(cpu, 64, 32);
 		reg_l(R_EDX) = val1.unsign32;
 		reg_l(R_EAX) = result.unsign32;
+
+		if (result.sign32 != result.sign64)
+			set_interrupt(0);
 
 		return 1+len;
 	}

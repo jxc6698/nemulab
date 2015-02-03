@@ -6,6 +6,12 @@
 
 extern char suffix;
 
+#define ADD_SUB_NAME add
+
+#include "exec/add_sub-template.h"
+
+#undef ADD_SUB_NAME
+/*
 make_helper(add_ib2al)
 {
 	eflags_help_s val1, val2, result;
@@ -367,4 +373,4 @@ make_helper(add_rmv2rv)
 {
 	return suffix=='l'?add_rml2rl(eip):add_rmw2rw(eip);
 }
-
+*/
