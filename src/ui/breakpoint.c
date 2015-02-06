@@ -25,6 +25,9 @@ void init_bp_pool() {
 /* TODO: Implement the function of breakpoint */
 void add_bp(uint32_t addr)
 {
+	uint8_t cmd = swaddr_read(addr, 1);
+	if (cmd == INT3_CODE)
+		return ;
     BP *cur=NULL;
     if (!free_) {
         printf("breakpoint already have 32\n");
@@ -48,7 +51,8 @@ void add_bp(uint32_t addr)
     cur->NO = bp_index;
     bp_index ++;
     cur->addr = addr;
-    cur->ins_f_bit = swaddr_read(addr, 1);
+    cur->ins_f_bit = cmd;
+	swaddr_write(addr, 1, INT3_CODE);
 
     return;
 }
@@ -78,11 +82,31 @@ void del_bp(uint32_t index)
     }
 }
 
-void show_bp() {
+void show_bp(int index) {
     BP *cur=NULL;
     cur = head;
     while (cur) {
-        printf("index : %d address %x\n", cur->NO, cur->addr);
+		if (index==-1 || index==cur->NO)
+			printf("index : %d address %x\n", cur->NO, cur->addr);
         cur = cur->next;
     }
+}
+
+int recover_bp(swaddr_t addr)
+{
+    BP *cur=NULL;
+    cur = head;
+    while (cur) {
+		if (cur->addr == addr) {
+			swaddr_write(addr, 1, cur->ins_f_bit);
+			return cur->NO;
+		}
+        cur = cur->next;
+    }
+	return -1;
+}
+
+void reset_bp(swaddr_t addr)
+{
+	swaddr_write(addr, 1, INT3_CODE);
 }

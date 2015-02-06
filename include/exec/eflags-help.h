@@ -29,7 +29,7 @@ extern uint8_t pf_flag[];
 #define sub_ch_eflags(cpu, BITS, offset)	do {					\
 	result.sign##BITS = val1.sign##BITS - val2.sign##BITS;			\
 	(val1.unsign##BITS<val2.unsign##BITS)? set_cf(cpu): clear_cf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((val1.unsign##BITS&0x0f)<(val2.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);																\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -43,7 +43,7 @@ extern uint8_t pf_flag[];
 #define add_ch_eflags(cpu, BITS, offset)	do {					\
 	result.sign##BITS = val1.sign##BITS + val2.sign##BITS;				\
 	(result.unsign##BITS<val1.unsign##BITS)? set_cf(cpu): clear_cf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((result.unsign##BITS&0x0f)<(val1.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);																\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -52,7 +52,7 @@ extern uint8_t pf_flag[];
 
 #define adc_ch_eflags(cpu, BITS, offset)	do {						\
 	result.sign##BITS = val1.sign##BITS +val2.sign##BITS +!!test_cf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((result.unsign##BITS&0x0f)<(val1.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);															\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -66,7 +66,7 @@ extern uint8_t pf_flag[];
 #define sbb_ch_eflags(cpu, BITS, offset)	do {					\
 	uint8_t ef_tmp = test_cf(cpu);									\
 	result.sign##BITS = val1.sign##BITS - val2.sign##BITS - ef_tmp;	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((val1.unsign##BITS&0x0f)<(val2.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);																\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -79,7 +79,7 @@ extern uint8_t pf_flag[];
 #define inc_ch_eflags(cpu, BITS, offset)	do {					\
 	result.sign##BITS = val1.sign##BITS + 1;						\
 	(result.unsign##BITS<val1.unsign##BITS)? set_cf(cpu): clear_cf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((result.unsign##BITS&0x0f)<(val1.unsign##BITS&0x0f))? set_af(cpu):clear_af(cpu);															\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -89,7 +89,7 @@ extern uint8_t pf_flag[];
 #define dec_ch_eflags(cpu, BITS, offset)	do {					\
 	result.sign##BITS = val1.sign##BITS - 1;						\
 	(val1.unsign##BITS<1)? set_cf(cpu): clear_cf(cpu);	\
-	(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+	(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 	((val1.unsign##BITS&0x0f)<1)? set_af(cpu):clear_af(cpu);		\
 	(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 	(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
@@ -157,7 +157,7 @@ extern uint8_t pf_flag[];
 		result.unsign##BITS = val1.unsign##BITS & val2.unsign##BITS;	\
 		clear_cf(cpu);									\
 		clear_of(cpu);									\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)
@@ -166,7 +166,7 @@ extern uint8_t pf_flag[];
 		result.unsign##BITS = val1.unsign##BITS | val2.unsign##BITS;	\
 		clear_cf(cpu);									\
 		clear_of(cpu);									\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)
@@ -175,7 +175,7 @@ extern uint8_t pf_flag[];
 		result.unsign##BITS = val1.unsign##BITS ^ val2.unsign##BITS;	\
 		clear_cf(cpu);									\
 		clear_of(cpu);									\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)
@@ -185,7 +185,7 @@ extern uint8_t pf_flag[];
 		result.sign##BITS = val1.sign##BITS << val2;	\
 		(val1.unsign##BITS &(0x1 <<(BITS-val2)))?set_cf(cpu):clear_cf(cpu);\
 		((val2==1)&& ((result.unsign##BITS >>(BITS-1))^test_cf(cpu)))?set_of(cpu):1;																	\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)
@@ -194,7 +194,7 @@ extern uint8_t pf_flag[];
 		result.sign##BITS = val1.sign##BITS >> val2;	\
 		(val1.unsign##BITS &(0x1 <<(val2-1)))?set_cf(cpu):clear_cf(cpu);\
 		(val2==1)?set_of(cpu):1;										\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)
@@ -203,7 +203,7 @@ extern uint8_t pf_flag[];
 		result.unsign##BITS = val1.unsign##BITS >> val2;				\
 		(val1.unsign##BITS &(0x1 <<(val2-1)))?set_cf(cpu):clear_cf(cpu);\
 		(val2==1&& (val1.unsign##BITS>>(BITS-1)))?set_of(cpu):1;		\
-		(pf_flag[result.unsign##BITS])? set_pf(cpu):clear_pf(cpu);		\
+		(pf_flag[result.unsign8])? set_pf(cpu):clear_pf(cpu);		\
 		(!result.unsign##BITS)? set_zf(cpu): clear_zf(cpu);				\
 		(result.sign##BITS&1<<(offset-1))? set_sf(cpu): clear_sf(cpu);	\
 	} while(0)

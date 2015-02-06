@@ -1,0 +1,5 @@
+
+improve program
+
+use test_cf(cpu)  test_zf(cpu) only return 1 bit, do not need to use ?1:0
+

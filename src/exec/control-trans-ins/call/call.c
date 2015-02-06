@@ -9,15 +9,17 @@ extern char suffix;
 make_helper(call_rell)
 {
 	uint32_t disp = instr_fetch(eip+1, 4);
-	cpu.eip = disp;	
+	cpu.eip += disp;	
+	print_asm("call 0x%x", cpu.eip);
 	return 5;
 }
 
 make_helper(call_relw)
 {
 	uint16_t disp = instr_fetch(eip+1, 2);
-	cpu.eip = disp;	
+	cpu.eip += disp;	
 	cpu.eip &= 0x0000ffff;
+	print_asm("call 0x%x", cpu.eip);
 	return 3;
 }
 
@@ -34,16 +36,18 @@ make_helper(call_rmw)
 	
 	if (m.mod == 3) {
 		disp.unsign16 = reg_w(m.reg);
-		cpu.eip = disp.unsign16;
+		cpu.eip += disp.sign16;
 		cpu.eip &= 0x0000ffff;
+		print_asm("call 0x%x", cpu.eip);
 
 		return 2;
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+1, &addr);
 		disp.unsign16 = instr_fetch(eip+1+len, 2);
-		cpu.eip = disp.unsign16;
+		cpu.eip += disp.sign16;
 		cpu.eip &= 0x0000ffff;
+		print_asm("call 0x%x", cpu.eip);
 
 		return 1+len;
 	}
@@ -57,14 +61,16 @@ make_helper(call_rml)
 	
 	if (m.mod == 3) {
 		disp.unsign32 = reg_l(m.reg);
-		cpu.eip = disp.sign32;
+		cpu.eip += disp.sign32;
+		print_asm("call 0x%x", cpu.eip);
 
 		return 2;
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+1, &addr);
 		disp.unsign32 = instr_fetch(eip+1+len, 4);
-		cpu.eip = disp.unsign32;
+		cpu.eip += disp.sign32;
+		print_asm("call 0x%x", cpu.eip);
 
 		return 1+len;
 	}

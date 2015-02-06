@@ -29,6 +29,8 @@
 
 #include "control-trans-ins/control-trans-ins.h"
 
+#include "str-trans-ins/str-trans-ins.h"
+
 #include "flag-control-ins/flag-control-ins.h"
 
 #include "miscellaneous-ins/miscellaneous-ins.h"
@@ -357,7 +359,7 @@ static make_helper(handle_f6_opcode)
 	m.val = instr_fetch(eip+1, 1);
 	switch (m.opcode) {
 		case 0:
-			return test_rmandib(eip);
+			return test_rm2ib(eip);
 		case 1:
 			return 0;
 		case 2:
@@ -386,7 +388,7 @@ static make_helper(handle_f7_opcode)
 	m.val = instr_fetch(eip+1, 1);
 	switch (m.opcode) {
 		case 0:
-			return test_rmandiv(eip);
+			return test_rm2iv(eip);
 		case 1:
 			return not_rmv(eip);;
 		case 2:

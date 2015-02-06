@@ -63,6 +63,9 @@ typedef struct {
 	} eflags;
 
 	swaddr_t eip;
+
+	swaddr_t breakpointAddr;
+
 } CPU_state;
 
 extern CPU_state cpu;

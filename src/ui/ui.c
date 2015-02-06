@@ -11,6 +11,7 @@
 uint32_t expr(char *e, bool *success);
 
 int nemu_state = END;
+int stop_state = NOBREAK;
 
 void cpu_exec(uint32_t);
 void restart();
@@ -106,9 +107,10 @@ void cmd_info(uint8_t type)
         printf("EDX %8x  EBX %8x\n", cpu.edx, cpu.ebx);
         printf("ESP %8x  EBP %8x\n", cpu.esp, cpu.ebp);
         printf("ESI %8x  EDI %8x\n", cpu.esi, cpu.edi);
+		printf("EFALGS 0x%08x\n", cpu.eflags.val);
         break;
     case 1:
-        printf("info b \n");
+        show_bp(-1);
         break;
     default:
         break;
@@ -152,20 +154,22 @@ void main_loop() {
 	while(1) {
 		cmd = rl_gets();
 		char *p = strtok(cmd, " ");
-
+		
 		if(p == NULL) { continue; }
 
 		if(strcmp(p, "c") == 0) { cmd_c(); }
 		else if(strcmp(p, "r") == 0) { cmd_r(); }
 		else if(strcmp(p, "q") == 0) { return; }
         else if(strcmp(p, "si") == 0) { 
-            char *p=strtok(NULL, " ");
+            p=strtok(NULL, " ");
             cmd_si((p==NULL)?1:atoi(p));
         } else if (strcmp(p, "info") == 0) {
-            cmd_info(strtok(NULL, " ")[0] == 'r'?0:1 );
+            p=strtok(NULL, " ");
+            p==NULL?0:cmd_info(p[0] == 'r'?0:1 );
         } else if (strcmp(p, "p") == 0) {
+            p=strtok(NULL, " ");
             bool success;
-            cmd_p(expr(strtok(NULL, " "), &success));
+            p==NULL?0:cmd_p(expr(p, &success));
         } else if (strcmp(p, "x") == 0) {
             char *tmp = strtok(NULL, " ");
             char *tmp1 = tmp+strlen(tmp)+1;
@@ -173,20 +177,22 @@ void main_loop() {
             cmd_x(atoi(tmp), expr(tmp1, &success));
         } else if (strcmp(p, "b") == 0) {
             char *tmp = strtok(NULL, " ");
+			swaddr_t addr;
             if (tmp[0] == '*') {
-                cmd_b(0);
+				if (tmp[1]=='0' && (tmp[2]=='x'||tmp[2]=='X'))
+					sscanf(&tmp[3], "%x", &addr);
+				else
+					sscanf(&tmp[1], "%d", &addr);
+				printf("addr is 0x%x  %s\n", addr, tmp);
+                cmd_b(addr);
             } else {
                 // query symbol table 
                 ;
             }
         } else if (strcmp(p, "d") == 0) {
             char *tmp = strtok(NULL, " ");
-            if (tmp[0] == '*') {
-                cmd_d(0);
-            } else {
-                // query symbol table 
-                ;
-            }
+			int n = atoi(tmp);
+			cmd_d(n);
         }
 
 

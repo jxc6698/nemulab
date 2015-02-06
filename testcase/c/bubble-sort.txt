@@ -1,0 +1,77 @@
+
+bubble-sort:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 10             	sub    $0x10,%esp
+  100006:	e8 62 00 00 00       	call   10006d <bubble_sort>
+  10000b:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  100012:	eb 19                	jmp    10002d <main+0x2d>
+  100014:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100017:	8b 04 85 60 01 10 00 	mov    0x100160(,%eax,4),%eax
+  10001e:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  100021:	74 06                	je     100029 <main+0x29>
+  100023:	b8 01 00 00 00       	mov    $0x1,%eax
+  100028:	82                   	(bad)  
+  100029:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  10002d:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
+  100031:	7e e1                	jle    100014 <main+0x14>
+  100033:	e8 35 00 00 00       	call   10006d <bubble_sort>
+  100038:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  10003f:	eb 19                	jmp    10005a <main+0x5a>
+  100041:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100044:	8b 04 85 60 01 10 00 	mov    0x100160(,%eax,4),%eax
+  10004b:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  10004e:	74 06                	je     100056 <main+0x56>
+  100050:	b8 01 00 00 00       	mov    $0x1,%eax
+  100055:	82                   	(bad)  
+  100056:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  10005a:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
+  10005e:	7e e1                	jle    100041 <main+0x41>
+  100060:	b8 00 00 00 00       	mov    $0x0,%eax
+  100065:	82                   	(bad)  
+  100066:	b8 00 00 00 00       	mov    $0x0,%eax
+  10006b:	c9                   	leave  
+  10006c:	c3                   	ret    
+
+0010006d <bubble_sort>:
+  10006d:	55                   	push   %ebp
+  10006e:	89 e5                	mov    %esp,%ebp
+  100070:	83 ec 10             	sub    $0x10,%esp
+  100073:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+  10007a:	eb 6d                	jmp    1000e9 <bubble_sort+0x7c>
+  10007c:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+  100083:	eb 53                	jmp    1000d8 <bubble_sort+0x6b>
+  100085:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100088:	8b 14 85 60 01 10 00 	mov    0x100160(,%eax,4),%edx
+  10008f:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100092:	83 c0 01             	add    $0x1,%eax
+  100095:	8b 04 85 60 01 10 00 	mov    0x100160(,%eax,4),%eax
+  10009c:	39 c2                	cmp    %eax,%edx
+  10009e:	7e 34                	jle    1000d4 <bubble_sort+0x67>
+  1000a0:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000a3:	8b 04 85 60 01 10 00 	mov    0x100160(,%eax,4),%eax
+  1000aa:	89 45 f4             	mov    %eax,-0xc(%ebp)
+  1000ad:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000b0:	83 c0 01             	add    $0x1,%eax
+  1000b3:	8b 14 85 60 01 10 00 	mov    0x100160(,%eax,4),%edx
+  1000ba:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000bd:	89 14 85 60 01 10 00 	mov    %edx,0x100160(,%eax,4)
+  1000c4:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000c7:	8d 50 01             	lea    0x1(%eax),%edx
+  1000ca:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  1000cd:	89 04 95 60 01 10 00 	mov    %eax,0x100160(,%edx,4)
+  1000d4:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  1000d8:	b8 63 00 00 00       	mov    $0x63,%eax
+  1000dd:	2b 45 f8             	sub    -0x8(%ebp),%eax
+  1000e0:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  1000e3:	7f a0                	jg     100085 <bubble_sort+0x18>
+  1000e5:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
+  1000e9:	83 7d f8 63          	cmpl   $0x63,-0x8(%ebp)
+  1000ed:	7e 8d                	jle    10007c <bubble_sort+0xf>
+  1000ef:	c9                   	leave  
+  1000f0:	c3                   	ret    

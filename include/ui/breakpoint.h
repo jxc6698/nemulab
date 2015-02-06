@@ -19,7 +19,8 @@ typedef struct breakpoint {
 
 void add_bp(uint32_t index);
 void del_bp(uint32_t index);
-
-
+void show_bp(int index);
+int recover_bp(swaddr_t addr);
+void reset_bp(swaddr_t addr);
 
 #endif

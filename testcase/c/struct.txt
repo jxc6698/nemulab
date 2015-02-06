@@ -1,0 +1,91 @@
+
+struct:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	57                   	push   %edi
+  100004:	56                   	push   %esi
+  100005:	53                   	push   %ebx
+  100006:	81 ec fc 03 00 00    	sub    $0x3fc,%esp
+  10000c:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  100013:	eb 25                	jmp    10003a <main+0x3a>
+  100015:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  100018:	8d 90 80 00 00 00    	lea    0x80(%eax),%edx
+  10001e:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  100021:	89 14 85 80 01 10 00 	mov    %edx,0x100180(,%eax,4)
+  100028:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  10002b:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  10002e:	81 c2 10 03 10 00    	add    $0x100310,%edx
+  100034:	88 02                	mov    %al,(%edx)
+  100036:	83 45 f0 01          	addl   $0x1,-0x10(%ebp)
+  10003a:	83 7d f0 63          	cmpl   $0x63,-0x10(%ebp)
+  10003e:	7e d5                	jle    100015 <main+0x15>
+  100040:	8d 85 fc fd ff ff    	lea    -0x204(%ebp),%eax
+  100046:	89 85 f0 fd ff ff    	mov    %eax,-0x210(%ebp)
+  10004c:	8d 54 24 04          	lea    0x4(%esp),%edx
+  100050:	bb 80 01 10 00       	mov    $0x100180,%ebx
+  100055:	b8 7d 00 00 00       	mov    $0x7d,%eax
+  10005a:	89 d7                	mov    %edx,%edi
+  10005c:	89 de                	mov    %ebx,%esi
+  10005e:	89 c1                	mov    %eax,%ecx
+  100060:	f3 a5                	rep movsl %ds:(%esi),%es:(%edi)
+  100062:	8b 85 f0 fd ff ff    	mov    -0x210(%ebp),%eax
+  100068:	89 04 24             	mov    %eax,(%esp)
+  10006b:	e8 5c 00 00 00       	call   1000cc <fun>
+  100070:	83 ec 04             	sub    $0x4,%esp
+  100073:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  10007a:	eb 37                	jmp    1000b3 <main+0xb3>
+  10007c:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  10007f:	8b 84 85 fc fd ff ff 	mov    -0x204(%ebp,%eax,4),%eax
+  100086:	8b 55 f0             	mov    -0x10(%ebp),%edx
+  100089:	83 ea 80             	sub    $0xffffff80,%edx
+  10008c:	39 d0                	cmp    %edx,%eax
+  10008e:	74 06                	je     100096 <main+0x96>
+  100090:	b8 01 00 00 00       	mov    $0x1,%eax
+  100095:	82                   	(bad)  
+  100096:	8d 55 8c             	lea    -0x74(%ebp),%edx
+  100099:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  10009c:	01 d0                	add    %edx,%eax
+  10009e:	0f b6 00             	movzbl (%eax),%eax
+  1000a1:	0f be c0             	movsbl %al,%eax
+  1000a4:	3b 45 f0             	cmp    -0x10(%ebp),%eax
+  1000a7:	74 06                	je     1000af <main+0xaf>
+  1000a9:	b8 01 00 00 00       	mov    $0x1,%eax
+  1000ae:	82                   	(bad)  
+  1000af:	83 45 f0 01          	addl   $0x1,-0x10(%ebp)
+  1000b3:	83 7d f0 63          	cmpl   $0x63,-0x10(%ebp)
+  1000b7:	7e c3                	jle    10007c <main+0x7c>
+  1000b9:	b8 00 00 00 00       	mov    $0x0,%eax
+  1000be:	82                   	(bad)  
+  1000bf:	b8 00 00 00 00       	mov    $0x0,%eax
+  1000c4:	8d 65 f4             	lea    -0xc(%ebp),%esp
+  1000c7:	5b                   	pop    %ebx
+  1000c8:	5e                   	pop    %esi
+  1000c9:	5f                   	pop    %edi
+  1000ca:	5d                   	pop    %ebp
+  1000cb:	c3                   	ret    
+
+001000cc <fun>:
+  1000cc:	55                   	push   %ebp
+  1000cd:	89 e5                	mov    %esp,%ebp
+  1000cf:	57                   	push   %edi
+  1000d0:	56                   	push   %esi
+  1000d1:	53                   	push   %ebx
+  1000d2:	8b 45 08             	mov    0x8(%ebp),%eax
+  1000d5:	89 c2                	mov    %eax,%edx
+  1000d7:	8d 5d 0c             	lea    0xc(%ebp),%ebx
+  1000da:	b8 7d 00 00 00       	mov    $0x7d,%eax
+  1000df:	89 d7                	mov    %edx,%edi
+  1000e1:	89 de                	mov    %ebx,%esi
+  1000e3:	89 c1                	mov    %eax,%ecx
+  1000e5:	f3 a5                	rep movsl %ds:(%esi),%es:(%edi)
+  1000e7:	8b 45 08             	mov    0x8(%ebp),%eax
+  1000ea:	5b                   	pop    %ebx
+  1000eb:	5e                   	pop    %esi
+  1000ec:	5f                   	pop    %edi
+  1000ed:	5d                   	pop    %ebp
+  1000ee:	c2 04 00             	ret    $0x4

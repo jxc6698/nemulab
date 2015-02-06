@@ -12,6 +12,7 @@ make_helper(push_mw)
 	assert(m.opcode==6);
 
 	int len = read_ModR_M(eip+1, &addr); 
+	print_asm("pushw %s", ModR_M_asm);
 	cpu.esp -= 2;
 	swaddr_write(cpu.esp, 2, swaddr_read(addr, 2));
 
@@ -26,6 +27,7 @@ make_helper(push_ml)
 	assert(m.opcode==6);
 
 	int len = read_ModR_M(eip+1, &addr); 
+	print_asm("pushl %s", ModR_M_asm);
 	cpu.esp -= 4;
 	swaddr_write(cpu.esp, 4, swaddr_read(addr, 4));
 
@@ -46,11 +48,13 @@ make_helper(push_r)
 	int reg_code = instr_fetch(eip, 1) & 0x07;
 	if (suffix == 'l') {
 		i32 = reg_l(reg_code);
+		print_asm("pushl %%%s", regsl[reg_code]);
 		cpu.esp -= 4;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 4, i32);
 	} else { /* 'w' */
 		i16 = reg_w(reg_code);
+		print_asm("pushw %%%s", regsw[reg_code]);
 		cpu.esp -= 2;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 2, i16);
@@ -62,6 +66,7 @@ make_helper(push_r)
 make_helper(push_ib)
 {
 	uint8_t i8 = instr_fetch(eip+1, 1);
+	print_asm("pushb 0x%2x", i8);
 	cpu.esp -= 1;
 	swaddr_write(cpu.esp, 1, i8);
 
@@ -78,12 +83,14 @@ make_helper(push_iv)
 	if (suffix == 'l') {
 		insLen += 4;
 		i32 = instr_fetch(eip+2, 4);
+		print_asm("pushl 0x%2x", i32);
 		cpu.esp -= 4;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 4, i32);
 	} else { /* 'w' */
 		insLen += 2;
 		i16 = instr_fetch(eip+2, 2);
+		print_asm("pushw 0x%2x", i16);
 		cpu.esp -= 2;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 2, i16);

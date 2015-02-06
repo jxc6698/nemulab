@@ -1,0 +1,37 @@
+
+fib:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 10             	sub    $0x10,%esp
+  100006:	c7 45 fc 02 00 00 00 	movl   $0x2,-0x4(%ebp)
+  10000d:	eb 48                	jmp    100057 <main+0x57>
+  10000f:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100012:	83 e8 01             	sub    $0x1,%eax
+  100015:	8b 14 85 c0 00 10 00 	mov    0x1000c0(,%eax,4),%edx
+  10001c:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  10001f:	83 e8 02             	sub    $0x2,%eax
+  100022:	8b 04 85 c0 00 10 00 	mov    0x1000c0(,%eax,4),%eax
+  100029:	01 c2                	add    %eax,%edx
+  10002b:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  10002e:	89 14 85 c0 00 10 00 	mov    %edx,0x1000c0(,%eax,4)
+  100035:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100038:	8b 14 85 c0 00 10 00 	mov    0x1000c0(,%eax,4),%edx
+  10003f:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100042:	8b 04 85 60 01 10 00 	mov    0x100160(,%eax,4),%eax
+  100049:	39 c2                	cmp    %eax,%edx
+  10004b:	74 06                	je     100053 <main+0x53>
+  10004d:	b8 01 00 00 00       	mov    $0x1,%eax
+  100052:	82                   	(bad)  
+  100053:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  100057:	83 7d fc 27          	cmpl   $0x27,-0x4(%ebp)
+  10005b:	7e b2                	jle    10000f <main+0xf>
+  10005d:	b8 00 00 00 00       	mov    $0x0,%eax
+  100062:	82                   	(bad)  
+  100063:	b8 00 00 00 00       	mov    $0x0,%eax
+  100068:	c9                   	leave  
+  100069:	c3                   	ret    

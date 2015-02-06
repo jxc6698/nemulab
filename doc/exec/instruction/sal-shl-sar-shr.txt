@@ -1,0 +1,40 @@
+
+
+
+
+(* COUNT is the second parameter *)
+(temp) <- COUNT;
+WHILE (temp != 0)
+DO
+   IF instruction is SAL or SHL
+   THEN CF <- high-order bit of r/m;
+   FI;
+   IF instruction is SAR or SHR
+   THEN CF <- low-order bit of r/m;
+   FI;
+   IF instruction = SAL or SHL
+   THEN r/m <- r/m * 2;
+   FI;
+   IF instruction = SAR
+   THEN r/m <- r/m /2 (*Signed divide, rounding toward negative infinity*);
+   FI;
+   IF instruction = SHR
+   THEN r/m <- r/m / 2; (* Unsigned divide *);
+   FI;
+   temp <- temp - 1;
+OD;
+(* Determine overflow for the various instructions *)
+IF COUNT = 1
+THEN
+   IF instruction is SAL or SHL
+   THEN OF <- high-order bit of r/m != (CF);
+   FI;
+   IF instruction is SAR
+   THEN OF <- 0;
+   FI;
+   IF instruction is SHR
+   THEN OF <- high-order bit of operand;
+   FI;
+ELSE OF <- undefined;
+
+FI;

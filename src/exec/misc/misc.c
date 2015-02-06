@@ -1,6 +1,7 @@
 #include "exec/helper.h"
 
 #include "ui/ui.h"
+#include "ui/breakpoint.h"
 
 #include "nemu.h"
 
@@ -18,9 +19,13 @@ make_helper(inv) {
 
 make_helper(int3) {
 	/* A breakpoint is hit! Do something here! */
-	assert(0);
-
-	return 1;
+	stop_state = BREAK;
+	nemu_state = STOP;
+	int index = recover_bp(eip);
+	assert(index!=-1);
+	printf("breakpoint %d at address 0x%x\n", index ,eip);
+	
+	return 0;
 }
 
 make_helper(nemu_trap) {

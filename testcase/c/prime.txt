@@ -1,0 +1,49 @@
+
+prime:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 10             	sub    $0x10,%esp
+  100006:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+  10000d:	c7 45 fc 65 00 00 00 	movl   $0x65,-0x4(%ebp)
+  100014:	eb 55                	jmp    10006b <main+0x6b>
+  100016:	c7 45 f0 01 00 00 00 	movl   $0x1,-0x10(%ebp)
+  10001d:	c7 45 f8 02 00 00 00 	movl   $0x2,-0x8(%ebp)
+  100024:	eb 1a                	jmp    100040 <main+0x40>
+  100026:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100029:	99                   	cltd   
+  10002a:	f7 7d f8             	idivl  -0x8(%ebp)
+  10002d:	89 d0                	mov    %edx,%eax
+  10002f:	85 c0                	test   %eax,%eax
+  100031:	75 09                	jne    10003c <main+0x3c>
+  100033:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  10003a:	eb 0c                	jmp    100048 <main+0x48>
+  10003c:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
+  100040:	8b 45 f8             	mov    -0x8(%ebp),%eax
+  100043:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  100046:	7c de                	jl     100026 <main+0x26>
+  100048:	83 7d f0 00          	cmpl   $0x0,-0x10(%ebp)
+  10004c:	74 19                	je     100067 <main+0x67>
+  10004e:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100051:	8b 04 85 e0 00 10 00 	mov    0x1000e0(,%eax,4),%eax
+  100058:	3b 45 f8             	cmp    -0x8(%ebp),%eax
+  10005b:	74 06                	je     100063 <main+0x63>
+  10005d:	b8 01 00 00 00       	mov    $0x1,%eax
+  100062:	82                   	(bad)  
+  100063:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  100067:	83 45 fc 02          	addl   $0x2,-0x4(%ebp)
+  10006b:	81 7d fc c8 00 00 00 	cmpl   $0xc8,-0x4(%ebp)
+  100072:	7e a2                	jle    100016 <main+0x16>
+  100074:	83 7d f4 15          	cmpl   $0x15,-0xc(%ebp)
+  100078:	74 06                	je     100080 <main+0x80>
+  10007a:	b8 01 00 00 00       	mov    $0x1,%eax
+  10007f:	82                   	(bad)  
+  100080:	b8 00 00 00 00       	mov    $0x0,%eax
+  100085:	82                   	(bad)  
+  100086:	b8 00 00 00 00       	mov    $0x0,%eax
+  10008b:	c9                   	leave  
+  10008c:	c3                   	ret    

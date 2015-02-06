@@ -1,0 +1,27 @@
+
+sum:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 10             	sub    $0x10,%esp
+  100006:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%ebp)
+  10000d:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+  100014:	eb 0a                	jmp    100020 <main+0x20>
+  100016:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100019:	01 45 f8             	add    %eax,-0x8(%ebp)
+  10001c:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  100020:	83 7d fc 64          	cmpl   $0x64,-0x4(%ebp)
+  100024:	7e f0                	jle    100016 <main+0x16>
+  100026:	81 7d f8 ba 13 00 00 	cmpl   $0x13ba,-0x8(%ebp)
+  10002d:	74 06                	je     100035 <main+0x35>
+  10002f:	b8 01 00 00 00       	mov    $0x1,%eax
+  100034:	82                   	(bad)  
+  100035:	b8 00 00 00 00       	mov    $0x0,%eax
+  10003a:	82                   	(bad)  
+  10003b:	b8 00 00 00 00       	mov    $0x0,%eax
+  100040:	c9                   	leave  
+  100041:	c3                   	ret    

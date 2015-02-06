@@ -1,0 +1,79 @@
+eflags:
+carry flag
+overflow flag
+
+In unsigned arithmetic, watch the carry flag to detect errors.
+In unsigned arithmetic, the overflow flag tells you nothing interesting.
+
+In signed arithmetic, watch the overflow flag to detect errors.
+In signed arithmetic, the carry flag tells you nothing interesting.
+
+carry bit
+	carry out of the most significant
+	   1111 + 0001 = 0000 (carry flag is turned on)
+	borrow into the most significant
+	   0000 - 0001 = 1111 (carry flag is turned on)
+	   Otherwise, the carry flag is turned off (zero).
+	    * 0111 + 0001 = 1000 (carry flag is turned off [zero])
+		* 1000 - 0001 = 0111 (carry flag is turned off [zero])
+
+overflow bit
+     ADDITION SIGN BITS
+	 num1sign num2sign sumsign
+	---------------------------
+		0 0 0
+ *OVER* 0 0 1 (adding two positives should be positive)
+		0 1 0
+		0 1 1
+		1 0 0
+		1 0 1
+ *OVER* 1 1 0 (adding two negatives should be negative)
+		1 1 1
+
+	UBTRACTION SIGN BITS
+    num1sign num2sign sumsign
+   ---------------------------
+	    0 0 0
+		0 0 1
+		0 1 0
+ *OVER* 0 1 1 (subtracting a negative is the same as adding a positive)
+ *OVER* 1 0 0 (subtracting a positive is the same as adding a negative)
+		1 0 1
+		1 1 0
+		1 1 1
+reference: http://teaching.idallen.com/dat2343/10f/notes/040_overflow.txt
+
+
+
+
+adc and sbb
+conclusion: overflow flag method is the same as add and sub
+			carry flag different from add and sub
+carry flag:
+adc:
+cf==1
+	val1 +1 == 0	set carry flag
+	result<val2		set carry flag
+cf==0
+	result<val2		set carry flag (the same as add)
+
+sbb:
+cf==1
+	val2 +1 == 0	set carry flag
+	val1<val2+1		set carry flag
+cf==0
+	val1<val2		set carry flag (the same as sub)  result>val1
+
+overflow flag:
+adc					+carry flag
+0 0 0 [0,127]			[1,127]
+0 0 1 [-128,-2]			[-128,-1]	overflow
+0 1 0 [0,126]			[0,127]
+0 1 1 [-128,-1]			[-127,-1]
+1 0 0
+1 0 1
+1 1 0 [0,127]			[1,127]		overflow
+1 1 1 [-128,-2]			[-128,-1]
+
+sbb
+

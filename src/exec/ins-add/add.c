@@ -7,9 +7,11 @@
 extern char suffix;
 
 #define ADD_SUB_NAME add
+#define ADD_SUB_CMD "add"
 
 #include "exec/add_sub-template.h"
 
+#undef ADD_SUB_CMD
 #undef ADD_SUB_NAME
 /*
 make_helper(add_ib2al)

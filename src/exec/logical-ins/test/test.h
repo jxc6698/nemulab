@@ -6,10 +6,10 @@ make_helper(test_iw);
 make_helper(test_il);
 make_helper(test_iv);
 
-make_helper(test_rmandib);
-make_helper(test_rmandiv);
+make_helper(test_rm2ib);
+make_helper(test_rm2iv);
 
-make_helper(test_rmandrb);
-make_helper(test_rmandrv);
+make_helper(test_rm2rb);
+make_helper(test_rm2rv);
 
 #endif

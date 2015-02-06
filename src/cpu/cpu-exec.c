@@ -1,4 +1,5 @@
 #include "ui/ui.h"
+#include "ui/breakpoint.h"
 
 #include "nemu.h"
 
@@ -47,6 +48,21 @@ void cpu_exec(volatile uint32_t n) {
 		swaddr_t eip_temp = cpu.eip;
 		int instr_len = exec(cpu.eip);
 
+		switch(stop_state) {
+		case NOBREAK:
+			break;
+		case BREAK: 
+			stop_state = BREAK1;
+			cpu.breakpointAddr = cpu.eip;
+			return;
+		case BREAK1:
+			stop_state = NOBREAK;
+			reset_bp(cpu.breakpointAddr);
+			break;
+		default :
+			assert(0);
+		}
+
 		cpu.eip += instr_len;
 
 		if(n_temp != -1 || (enable_debug && !quiet)) {
@@ -59,5 +75,6 @@ void cpu_exec(volatile uint32_t n) {
 			return;
 		} 
 		else if(nemu_state == END) { return; }
+		else if (nemu_state == STOP) return ;
 	}
 }

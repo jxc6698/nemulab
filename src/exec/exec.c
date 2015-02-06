@@ -36,16 +36,16 @@ helper_fun opcode_table [256] = {
 /* 0x64 */	inv, inv, data_size, inv,
 /* 0x68 */	push_iv, imul_rmviv2rv, push_ib, imul_rmvib2rv, 
 /* 0x6c */	inv, inv, inv, inv, 
-/* 0x70 */	inv, inv, inv, jae_rel8,
-/* 0x74 */	je_rel8, inv, inv, ja_rel8,
+/* 0x70 */	inv, inv, jb_rel8, jae_rel8,
+/* 0x74 */	je_rel8, inv, jbe_rel8, ja_rel8,
 /* 0x78 */	inv, inv, inv, inv, 
 /* 0x7c */	inv, inv, inv, inv, 
 /* 0x80 */	handle_80_opcode, handle_81_opcode, nemu_trap, handle_83_opcode, 
-/* 0x84 */	test_rmandrb, test_rmandrv, xchg_rmb2rb, xchg_rmv2rv, 
+/* 0x84 */	test_rm2rb, test_rm2rv, xchg_rmb2rb, xchg_rmv2rv, 
 /* 0x88 */	mov_r2rm_b, mov_r2rm_v, mov_rm2r_b, mov_rm2r_v,
-/* 0x8c */	inv, inv, inv, pop_mv, 
-/* 0x90 */	xchg_av2rv, inv, inv, inv,
-/* 0x94 */	inv, inv, inv, inv,
+/* 0x8c */	inv, lea_m2rv, inv, pop_mv, 
+/* 0x90 */	nop, xchg_av2rv, xchg_av2rv, xchg_av2rv,
+/* 0x94 */	xchg_av2rv, xchg_av2rv, xchg_av2rv, xchg_av2rv,
 /* 0x98 */	inv, inv, inv, inv, 
 /* 0x9c */	push_fv, pop_fv, inv, inv, 
 /* 0xa0 */	mov_moffs2a_b, mov_moffs2a_v, mov_a2moffs_b, mov_a2moffs_v,
@@ -71,7 +71,7 @@ helper_fun opcode_table [256] = {
 /* 0xf0 */	inv, inv, inv, inv,
 /* 0xf4 */	inv, inv, handle_f6_opcode, handle_f7_opcode,
 /* 0xf8 */	inv, inv, inv, inv,
-/* 0xfc */	inv, inv, handle_fe_opcode, handle_ff_opcode
+/* 0xfc */	cld, std, handle_fe_opcode, handle_ff_opcode
 };
 
 make_helper(exec) {

@@ -1,0 +1,80 @@
+所有的未处理的情况, 和已知的bug都是 标明注释 UNFIXED, 如果要寻找只需要:
+find . -name "*.[ch]" | xrags grep "UNFIXED"
+
+ubuntu 需要做的一些修改, gcc方面 testcase/c 的Makefile中
+-CFLAGS  = -m32 -Wall -Werror -static -I..
++CFLAGS  = -m32 -Wall -Werror -static -I.. -fno-stack-protector
+
+./Makefile 中
+-CFLAGS  = -ggdb -MD -Wall -Werror -fno-strict-aliasing -I./include -O2
++CFLAGS  = -ggdb -MD -Wall -Wno-unused-result -Werror -fno-strict-aliasing -I./include -O2
+
+optimize
+
+修要修改宏定义 如果是quiet那么就 就不要打印指令信息到assemble[]中,修改include/exec/helper.h 中 宏定义 print_asm: 应该可以部分提升效率
+
+src/ui/ui.c
+	函数cmd_c中，最后 if (neme_state != END) neme_state=STOP这里的状态转移，
+
+
+src/main.c
+	相关参数
+	debug:
+	quiet:	
+
+src/cpu/cpu-exec.c
+    cpu_exec: n_temp 是 uint32 无符号数,如果传入的n是-1,就会一直执行
+
+src/exec/misc/misc.c
+    inv 函数,所有还没有实现的指令都会进入这个函数
+
+src/exec/prefix/prefix.h
+    data_size handle operand-size prefix  0x66 
+
+src/exec/data-mov/mov.c
+    mov_i2r_v all ended with v function
+    use mov-template to form _b _w _l
+
+src/exec/ins-push/
+	与 push 相关的指令
+
+src/exec/xxx
+
+src/memory/dram.c
+    ddr3_read:
+    ddr3_write: 8字节吞吐
+
+    dram_read:
+    dram_write: 4字节吞吐
+    
+    rowbufs: 缓存
+    dram: 内存
+
+src/memory/memory.c
+    hwaddr_read
+    hwaddr_write
+    swaddr_read
+    swaddr_write
+    instr_fetch get instruction, why only 1 or 2 or 4
+
+    
+src/ui/breakpoint.c
+    断点的操作
+
+
+
+
+include/ui/breakpoint.h
+    int3, 断点的相关定义与异常
+
+include/cpu/reg.h
+    CPU_state cpu的状态信息, 寄存器
+
+
+
+
+ find ./testcase/c/ -name '*[^.c|.txt|.o]' | xargs ./test.sh 
+
+
+要做的
+gdb 支持重新开始的时候断点依旧存在， 在重新载入程序以后要可以恢复以前的断点

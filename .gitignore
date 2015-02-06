@@ -3,5 +3,7 @@
 !*/
 !Makefile
 !*.[cSh]
+!*.txt
 !test.sh
 !.gitignore
+!readme

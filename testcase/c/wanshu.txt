@@ -1,0 +1,50 @@
+
+wanshu:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 10             	sub    $0x10,%esp
+  100006:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+  10000d:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%ebp)
+  100014:	eb 54                	jmp    10006a <main+0x6a>
+  100016:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+  10001d:	c7 45 f4 01 00 00 00 	movl   $0x1,-0xc(%ebp)
+  100024:	eb 17                	jmp    10003d <main+0x3d>
+  100026:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100029:	99                   	cltd   
+  10002a:	f7 7d f4             	idivl  -0xc(%ebp)
+  10002d:	89 d0                	mov    %edx,%eax
+  10002f:	85 c0                	test   %eax,%eax
+  100031:	75 06                	jne    100039 <main+0x39>
+  100033:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100036:	01 45 f8             	add    %eax,-0x8(%ebp)
+  100039:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+  10003d:	8b 45 f4             	mov    -0xc(%ebp),%eax
+  100040:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  100043:	7c e1                	jl     100026 <main+0x26>
+  100045:	8b 45 f8             	mov    -0x8(%ebp),%eax
+  100048:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  10004b:	75 19                	jne    100066 <main+0x66>
+  10004d:	8b 45 f0             	mov    -0x10(%ebp),%eax
+  100050:	8b 04 85 c4 00 10 00 	mov    0x1000c4(,%eax,4),%eax
+  100057:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+  10005a:	74 06                	je     100062 <main+0x62>
+  10005c:	b8 01 00 00 00       	mov    $0x1,%eax
+  100061:	82                   	(bad)  
+  100062:	83 45 f0 01          	addl   $0x1,-0x10(%ebp)
+  100066:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  10006a:	81 7d fc e7 03 00 00 	cmpl   $0x3e7,-0x4(%ebp)
+  100071:	7e a3                	jle    100016 <main+0x16>
+  100073:	83 7d f0 03          	cmpl   $0x3,-0x10(%ebp)
+  100077:	74 06                	je     10007f <main+0x7f>
+  100079:	b8 01 00 00 00       	mov    $0x1,%eax
+  10007e:	82                   	(bad)  
+  10007f:	b8 00 00 00 00       	mov    $0x0,%eax
+  100084:	82                   	(bad)  
+  100085:	b8 00 00 00 00       	mov    $0x0,%eax
+  10008a:	c9                   	leave  
+  10008b:	c3                   	ret    

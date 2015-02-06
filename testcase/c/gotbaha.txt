@@ -1,0 +1,82 @@
+
+gotbaha:     file format elf32-i386
+
+
+Disassembly of section .text:
+
+00100000 <main>:
+  100000:	55                   	push   %ebp
+  100001:	89 e5                	mov    %esp,%ebp
+  100003:	83 ec 14             	sub    $0x14,%esp
+  100006:	c7 45 fc 04 00 00 00 	movl   $0x4,-0x4(%ebp)
+  10000d:	eb 1a                	jmp    100029 <main+0x29>
+  10000f:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100012:	89 04 24             	mov    %eax,(%esp)
+  100015:	e8 68 00 00 00       	call   100082 <gotbaha>
+  10001a:	83 f8 01             	cmp    $0x1,%eax
+  10001d:	74 06                	je     100025 <main+0x25>
+  10001f:	b8 01 00 00 00       	mov    $0x1,%eax
+  100024:	82                   	(bad)  
+  100025:	83 45 fc 02          	addl   $0x2,-0x4(%ebp)
+  100029:	81 7d fc e8 03 00 00 	cmpl   $0x3e8,-0x4(%ebp)
+  100030:	7e dd                	jle    10000f <main+0xf>
+  100032:	b8 00 00 00 00       	mov    $0x0,%eax
+  100037:	82                   	(bad)  
+  100038:	b8 00 00 00 00       	mov    $0x0,%eax
+  10003d:	c9                   	leave  
+  10003e:	c3                   	ret    
+
+0010003f <is_prime>:
+  10003f:	55                   	push   %ebp
+  100040:	89 e5                	mov    %esp,%ebp
+  100042:	83 ec 10             	sub    $0x10,%esp
+  100045:	83 7d 08 01          	cmpl   $0x1,0x8(%ebp)
+  100049:	7f 07                	jg     100052 <is_prime+0x13>
+  10004b:	b8 00 00 00 00       	mov    $0x0,%eax
+  100050:	eb 2e                	jmp    100080 <is_prime+0x41>
+  100052:	c7 45 fc 02 00 00 00 	movl   $0x2,-0x4(%ebp)
+  100059:	eb 18                	jmp    100073 <is_prime+0x34>
+  10005b:	8b 45 08             	mov    0x8(%ebp),%eax
+  10005e:	99                   	cltd   
+  10005f:	f7 7d fc             	idivl  -0x4(%ebp)
+  100062:	89 d0                	mov    %edx,%eax
+  100064:	85 c0                	test   %eax,%eax
+  100066:	75 07                	jne    10006f <is_prime+0x30>
+  100068:	b8 00 00 00 00       	mov    $0x0,%eax
+  10006d:	eb 11                	jmp    100080 <is_prime+0x41>
+  10006f:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  100073:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100076:	3b 45 08             	cmp    0x8(%ebp),%eax
+  100079:	7c e0                	jl     10005b <is_prime+0x1c>
+  10007b:	b8 01 00 00 00       	mov    $0x1,%eax
+  100080:	c9                   	leave  
+  100081:	c3                   	ret    
+
+00100082 <gotbaha>:
+  100082:	55                   	push   %ebp
+  100083:	89 e5                	mov    %esp,%ebp
+  100085:	83 ec 14             	sub    $0x14,%esp
+  100088:	c7 45 fc 02 00 00 00 	movl   $0x2,-0x4(%ebp)
+  10008f:	eb 30                	jmp    1000c1 <gotbaha+0x3f>
+  100091:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  100094:	89 04 24             	mov    %eax,(%esp)
+  100097:	e8 a3 ff ff ff       	call   10003f <is_prime>
+  10009c:	85 c0                	test   %eax,%eax
+  10009e:	74 1d                	je     1000bd <gotbaha+0x3b>
+  1000a0:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000a3:	8b 55 08             	mov    0x8(%ebp),%edx
+  1000a6:	29 c2                	sub    %eax,%edx
+  1000a8:	89 d0                	mov    %edx,%eax
+  1000aa:	89 04 24             	mov    %eax,(%esp)
+  1000ad:	e8 8d ff ff ff       	call   10003f <is_prime>
+  1000b2:	85 c0                	test   %eax,%eax
+  1000b4:	74 07                	je     1000bd <gotbaha+0x3b>
+  1000b6:	b8 01 00 00 00       	mov    $0x1,%eax
+  1000bb:	eb 11                	jmp    1000ce <gotbaha+0x4c>
+  1000bd:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+  1000c1:	8b 45 fc             	mov    -0x4(%ebp),%eax
+  1000c4:	3b 45 08             	cmp    0x8(%ebp),%eax
+  1000c7:	7c c8                	jl     100091 <gotbaha+0xf>
+  1000c9:	b8 00 00 00 00       	mov    $0x0,%eax
+  1000ce:	c9                   	leave  
+  1000cf:	c3                   	ret    
