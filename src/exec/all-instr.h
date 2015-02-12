@@ -25,6 +25,8 @@
 #include "ins-div/div.h"
 #include "ins-div/idiv.h"
 
+#include "ins-cwd/cwd.h"
+
 #include "logical-ins/logical_ins.h"
 
 #include "control-trans-ins/control-trans-ins.h"
@@ -39,8 +41,38 @@
 */
 static make_helper(handle_0f)
 {
-	uint8_t op = instr_fetch(eip, 1);
+	uint8_t op = instr_fetch(eip+1, 1);
 	switch (op) {
+		case 0x81:
+			return jno_relv(eip);
+		case 0x82:
+			return jb_relv(eip);
+		case 0x83:
+			return jae_relv(eip);
+		case 0x84:
+			return je_relv(eip);
+		case 0x85:
+			return jne_relv(eip);
+		case 0x86:
+			return jbe_relv(eip);
+		case 0x87:
+			return ja_relv(eip);
+		case 0x88:
+			return js_relv(eip);
+		case 0x89:
+			return jns_relv(eip);
+		case 0x8a:
+			return jp_relv(eip);
+		case 0x8b:
+			return jnp_relv(eip);
+		case 0x8c:
+			return jl_relv(eip);
+		case 0x8d:
+			return jge_relv(eip);
+		case 0x8e:
+			return jle_relv(eip);
+		case 0x8f:
+			return jg_relv(eip);
 		case 0x90:
 			return seto_rmb(eip);
 		case 0x91:
@@ -272,21 +304,21 @@ static make_helper(handle_80_opcode)
 	m.val = instr_fetch(eip+1, 1);
 	switch (m.opcode) {
 		case 0:
-			return add_ib2rmb(eip);
+			return add_rmb2ib(eip);
 		case 1:
-			return or_ib2rmb(eip);;
+			return or_rmb2ib(eip);;
 		case 2:
-			return adc_ib2rmb(eip);
+			return adc_rmb2ib(eip);
 		case 3:
-			return sbb_ib2rmb(eip);
+			return sbb_rmb2ib(eip);
 		case 4:
-			return and_ib2rmb(eip);
+			return and_rmb2ib(eip);
 		case 5:
-			return sub_ib2rmb(eip);
+			return sub_rmb2ib(eip);
 		case 6:
-			return xor_ib2rmb(eip);
+			return xor_rmb2ib(eip);
 		case 7:
-			return cmp_ib2rmb(eip);
+			return cmp_rmb2ib(eip);
 		default:
 			assert(0);
 	}
@@ -301,21 +333,21 @@ static make_helper(handle_81_opcode)
 	m.val = instr_fetch(eip+1, 1);
 	switch (m.opcode) {
 		case 0:
-			return add_iv2rmv(eip);
+			return add_rmv2iv(eip);
 		case 1:
-			return or_iv2rmv(eip);
+			return or_rmv2iv(eip);
 		case 2:
-			return adc_iv2rmv(eip);
+			return adc_rmv2iv(eip);
 		case 3:
-			return sbb_iv2rmv(eip);
+			return sbb_rmv2iv(eip);
 		case 4:
-			return and_iv2rmv(eip);
+			return and_rmv2iv(eip);
 		case 5:
-			return sub_iv2rmv(eip);;
+			return sub_rmv2iv(eip);;
 		case 6:
-			return xor_iv2rmv(eip);
+			return xor_rmv2iv(eip);
 		case 7:
-			return cmp_iv2rmv(eip);
+			return cmp_rmv2iv(eip);
 		default:
 			assert(0);
 	}
@@ -330,21 +362,21 @@ static make_helper(handle_83_opcode)
 	m.val = instr_fetch(eip+1, 1);
 	switch (m.opcode) {
 		case 0:
-			return add_ib2rmv(eip);
+			return add_rmv2ib(eip);
 		case 1:
-			return or_ib2rmv(eip);;
+			return or_rmv2ib(eip);;
 		case 2:
-			return adc_ib2rmv(eip);
+			return adc_rmv2ib(eip);
 		case 3:
-			return sbb_ib2rmv(eip);
+			return sbb_rmv2ib(eip);
 		case 4:
-			return and_ib2rmv(eip);
+			return and_rmv2ib(eip);
 		case 5:
-			return sub_ib2rmv(eip);
+			return sub_rmv2ib(eip);
 		case 6:
-			return xor_ib2rmv(eip);
+			return xor_rmv2ib(eip);
 		case 7:
-			return cmp_ib2rmv(eip);
+			return cmp_rmv2ib(eip);
 		default:
 			assert(0);
 	}

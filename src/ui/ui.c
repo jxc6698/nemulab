@@ -15,6 +15,8 @@ int stop_state = NOBREAK;
 
 void cpu_exec(uint32_t);
 void restart();
+swaddr_t get_sym_addr(char *);
+char *get_func_name(swaddr_t, int*);
 
 /* We use the readline library to provide more flexibility to read from stdin. */
 char* rl_gets() {
@@ -92,6 +94,7 @@ void cmd_si(int n)
         nemu_state = STOP;
 	}
 
+	nemu_state = RUNNING;
     cpu_exec(n);
     return;
 }
@@ -149,6 +152,25 @@ void cmd_d(uint32_t addr)
     del_bp(addr);
 }
 
+/*  if current eip is push %ebp 
+*	this will be wrong
+*/
+void cmd_bt()
+{
+	uint32_t ebp=cpu.ebp, eip=cpu.eip;
+	int mark;
+	do {
+		printf(" function %s\n", get_func_name(eip, &mark));
+		if (mark) {
+			eip = swaddr_read(ebp+4, 4);
+			ebp = swaddr_read(ebp, 4);
+		} else 
+			eip = swaddr_read(cpu.esp, 4);
+		if (ebp==0)
+			break;
+	} while(1);
+}
+
 void main_loop() {
 	char *cmd;
 	while(1) {
@@ -187,13 +209,21 @@ void main_loop() {
                 cmd_b(addr);
             } else {
                 // query symbol table 
-                ;
+				addr = get_sym_addr(tmp);
+                if (addr==0xffffffff)
+					printf("no symbol %s\n", tmp);
+				else {
+					printf("addr is 0x%x  %s\n", addr, tmp);
+					cmd_b(addr);
+				}
             }
         } else if (strcmp(p, "d") == 0) {
             char *tmp = strtok(NULL, " ");
 			int n = atoi(tmp);
 			cmd_d(n);
-        }
+        } else if (strcmp(p, "bt") == 0) {
+			cmd_bt();
+		}
 
 
 

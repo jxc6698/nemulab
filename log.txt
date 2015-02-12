@@ -1,35 +1,38 @@
-(nemu) r
+(nemu) q[Ksi
   100000:   55                                    pushl %ebp
+(nemu) si
   100001:   89 e5                                 movl %esp,%ebp
-  100003:   83 ec 18                              sub $0xfffffffc,%esp
-  100006:   c7 45 f4 00 00 00 00                  movl $0x0,-0xc(%ebp)
-  10000d:   c7 45 fc 00 00 00 00                  movl $0x0,-0x4(%ebp)
-  100014:   eb 55                                 jmp +1048681
-  10006b:   8b 45 fc                              movl -0x4(%ebp),%eax
-  10006e:   83 f8 07                              cmp $0x 0,%eax
-  100071:   76 a3                                 jbe 0x100016
-  100016:   c7 45 f8 00 00 00 00                  movl $0x0,-0x8(%ebp)
-  10001d:   eb 40                                 jmp +1048669
-  10005f:   8b 45 f8                              movl -0x8(%ebp),%eax
-  100062:   83 f8 07                              cmp $0x 0,%eax
-  100065:   76 b8                                 jbe 0x10001f
-  10001f:   8b 45 f8                              movl -0x8(%ebp),%eax
-  100022:   8b 14 85 00 01 10 00                  movl 0x100100(,%eax,4),%edx
-  100029:   8b 45 fc                              movl -0x4(%ebp),%eax
-  10002c:   8b 04 85 00 01 10 00                  movl 0x100100(,%eax,4),%eax
-  100033:   89 54 24 04                           movl %edx,0x4(%esp)
-  100037:   89 04 24                              movl %eax,(%esp)
-  10003a:   e8 41 00 00 00                        call 0x10007b
-  100080:   55                                    pushl %ebp
-  100081:   89 e5                                 movl %esp,%ebp
-  100083:   83 ec 10                              sub $0xffffffe0,%esp
-  100086:   8b 45 0c                              movl 0xc(%ebp),%eax
-  100089:   8b 55 08                              movl 0x8(%ebp),%edx
-  10008c:   01 d0                                 add %edx,%eax
-  10008e:   89 45 fc                              movl %eax,-0x4(%ebp)
-  100091:   8b 45 fc                              movl -0x4(%ebp),%eax
-  100094:   c9                                    leavew
-  100095:   c3                                    ret
-[1;31maddr = 14100159
-[0m
-nemu: src/memory/dram.c:55: ddr3_read: Assertion `0' failed.
+(nemu) si
+  100003:   83 ec 14                              sub $0x14,%esp
+(nemu) si
+  100006:   c7 45 fc 00 00 00 00                  movl $0x0,-0x4(%ebp)
+(nemu) si 100[K
+  10000d:   eb 26                                 jmp 100035
+  100035:   83 7d fc 0e                           cmp $0x e,-0x4(%ebp)
+  100039:   7e d4                                 jle 0x10000f
+  10000f:   8b 45 fc                              movl -0x4(%ebp),%eax
+  100012:   83 e8 01                              sub $0x 1,%eax
+  100015:   89 04 24                              movl %eax,(%esp)
+  100018:   e8 2b 00 00 00                        call 0x100043
+  100048:   55                                    pushl %ebp
+  100049:   89 e5                                 movl %esp,%ebp
+  10004b:   83 ec 10                              sub $0x10,%esp
+(nemu) si 1[K[K[K[Kbt
+ function switch_case
+ function main
+(nemu) si10
+Unknown command 'si10'
+(nemu) si 10
+  10004e:   83 7d 08 0c                           cmp $0x c,0x8(%ebp)
+  100052:   77 45                                 ja 0x100099
+  100099:   c7 45 fc ff ff ff ff                  movl $0xffffffff,-0x4(%ebp)
+  1000a0:   90                                    movl $0xffffffff,-0x4(%ebp)
+  1000a1:   8b 45 fc                              movl -0x4(%ebp),%eax
+  1000a4:   c9                                    leavew
+  1000a5:   c3                                    ret
+  10001d:   8b 55 fc                              movl -0x4(%ebp),%edx
+  100020:   8b 14 95 40 01 10 00                  movl 0x100140(,%edx,4),%edx
+  100027:   39 d0                                 cmp %eax,%edx
+(nemu) bt
+ function main
+(nemu) q

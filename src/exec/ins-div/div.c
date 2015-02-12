@@ -79,7 +79,7 @@ make_helper(div_rml2eax)
 	if (m.mod == 3) {
 		val1.unsign32 = reg_l(R_EDX);
 		val1.unsign64 <<= 32;
-		val1.unsign64 = reg_l(R_EAX);
+		val1.unsign64 += reg_l(R_EAX);
 		val2.unsign32 = reg_l(m.R_M);
 		div_ch_eflags(cpu, 64, 32);
 		reg_l(R_EDX) = val1.unsign32;
@@ -95,6 +95,7 @@ make_helper(div_rml2eax)
 		val2.unsign32 = swaddr_read(addr, 4);
 		val1.unsign32 = reg_l(R_EDX);
 		val1.unsign64 <<= 32;
+		val1.unsign64 += reg_l(R_EAX);
 		div_ch_eflags(cpu, 64, 32);
 		reg_l(R_EDX) = val1.unsign32;
 		reg_l(R_EAX) = result.unsign32;

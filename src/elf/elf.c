@@ -102,3 +102,53 @@ void load_prog() {
 	fclose(fp);
 }
 
+void list_sym(void)
+{
+	int i;
+	Elf32_Sym *sym= NULL;
+	printf("symtab item size %ld ,num : %d\n", sizeof(symtab[0]), nr_symtab_entry);
+	for (i=0;i<nr_symtab_entry;i++) {
+		sym = symtab + i;
+		if (ELF32_ST_TYPE(sym->st_info) == STT_FUNC)
+			printf("name %s addr %x st_size %d info %x\n", strtab+sym->st_name, sym->st_value, sym->st_size, sym->st_info);
+		
+	}
+
+	return;
+}
+
+swaddr_t get_sym_addr(char *name) 
+{
+	int i;
+	Elf32_Sym *sym= NULL;
+	for (i=0;i<nr_symtab_entry;i++) {
+		sym = symtab + i;
+		if (ELF32_ST_TYPE(sym->st_info) == STT_FUNC) {
+			if (strcmp(strtab+sym->st_name, name) == 0) {
+				return sym->st_value;
+			}
+		}
+	}
+
+	return -1;
+}
+
+char *get_func_name(swaddr_t addr, int* mark)
+{
+	int i;
+	Elf32_Sym *sym= NULL;
+	for (i=0;i<nr_symtab_entry;i++) {
+		sym = symtab + i;
+		if (ELF32_ST_TYPE(sym->st_info) == STT_FUNC) {
+			if (sym->st_value < addr && sym->st_value+sym->st_size>addr)
+				*mark = 1;
+			else if (sym->st_value == addr || sym->st_value+sym->st_size>addr)
+				*mark = 0;
+			else
+				continue;
+			return strtab + sym->st_name;
+		}
+	}
+
+	return 0;
+}

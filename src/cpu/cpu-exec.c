@@ -27,6 +27,7 @@ void restart() {
 	cpu.eip = LOADER_START;
     cpu.eflags.val = 0x02;
 	cpu.esp = 0x100000;
+	cpu.ebp = 0;
 
 	init_dram();
 }
@@ -75,6 +76,6 @@ void cpu_exec(volatile uint32_t n) {
 			return;
 		} 
 		else if(nemu_state == END) { return; }
-		else if (nemu_state == STOP) return ;
+		else if (nemu_state == STOP) return;
 	}
 }

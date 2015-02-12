@@ -1,16 +1,9 @@
 #ifndef __ADD_H__
 #define __ADD_H__
 
-make_helper(add_ib2al);
-make_helper(add_iv2av);
-make_helper(add_ib2rmb);
-make_helper(add_iv2rmv);
-make_helper(add_ib2rmv);
+#define NAME add
 
-make_helper(add_rb2rmb);
-make_helper(add_rv2rmv);
+#include "exec/add_sub-h-template.h"
 
-make_helper(add_rmb2rb);
-make_helper(add_rmv2rv);
-
+#undef NAME
 #endif

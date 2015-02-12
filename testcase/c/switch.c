@@ -1,6 +1,7 @@
 #include "trap.h"
 
 int switch_case(int n) {
+	k
 	int ret;
 	switch(n) {
 		case 0: ret = 0; break;

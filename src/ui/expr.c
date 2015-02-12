@@ -36,7 +36,7 @@ static struct rule {
     {"\\(", '('},                   // 6 left
     {"\\)", ')'},                   // 7 right
     {"\\.", '.'},                   // 8 Dominant operator
-    {"(0x)?[0-9]+", NUM},           // 9 num
+    {"(0x)?[0-9a-fA-F]+", NUM},           // 9 num
     {"\\$E((AX)|(BX)|(CX)|(DX)|(SP)|(BP)|(SI)|(EI))", REG}
                                     // 10 registers 
 };

@@ -9,6 +9,7 @@ void init_bp_pool();
 void init_regex();
 void init_signal();
 void reg_test();
+void list_sym();
 
 int enable_debug = false;
 int quiet = false;
@@ -42,8 +43,7 @@ int main(int argc, char *argv[]) {
 	init_signal();
 	init_bp_pool();
 	load_table();
-
-
+	
 	/* Test whether the 'CPU_state' structure is organized correctly. */
 	reg_test();
 

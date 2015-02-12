@@ -9,9 +9,11 @@ ubuntu 需要做的一些修改, gcc方面 testcase/c 的Makefile中
 -CFLAGS  = -ggdb -MD -Wall -Werror -fno-strict-aliasing -I./include -O2
 +CFLAGS  = -ggdb -MD -Wall -Wno-unused-result -Werror -fno-strict-aliasing -I./include -O2
 
-optimize
+optimize:
 
 修要修改宏定义 如果是quiet那么就 就不要打印指令信息到assemble[]中,修改include/exec/helper.h 中 宏定义 print_asm: 应该可以部分提升效率
+
+说不定可以去优化 rep 的操作， 不过看 i386的手册的rep的时钟周期，原来的意思应该是一次一次的去执行
 
 src/ui/ui.c
 	函数cmd_c中，最后 if (neme_state != END) neme_state=STOP这里的状态转移，

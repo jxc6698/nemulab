@@ -18,6 +18,7 @@ make_helper(pop_mw)
 	int len = read_ModR_M(eip+1, &addr); 
 	swaddr_write(addr, 2, swaddr_read(cpu.esp, 2));
 	cpu.esp += 2;
+	print_asm("popw %s", ModR_M_asm);
 
 	return len+1;
 }
@@ -31,21 +32,23 @@ make_helper(pop_ml)
 
 	int len = read_ModR_M(eip+1, &addr); 
 	swaddr_write(addr, 4, swaddr_read(cpu.esp, 4));
-	cpu.esp -= 4;
+	cpu.esp += 4;
+	print_asm("popl %s", ModR_M_asm);
 
 	return len+1;
 }
 
 make_helper(pop_mv)
 {
-	return suffix == 'l'?pop_mw(eip):pop_ml(eip);
+	return suffix == 'l'?pop_ml(eip):pop_mw(eip);
 }
 
 make_helper(pop_rw)
 {
 	int reg = instr_fetch(eip, 1) & 0x07;
 	reg_w(reg) = swaddr_read(cpu.esp, 2);
-	cpu.esp -= 2;
+	cpu.esp += 2;
+	print_asm("popw %%%s", regsw[reg]);
 
 	return 1;
 }
@@ -54,14 +57,15 @@ make_helper(pop_rl)
 {
 	int reg = instr_fetch(eip, 1) & 0x07;
 	reg_l(reg) = swaddr_read(cpu.esp, 4);
-	cpu.esp -= 4;
+	cpu.esp += 4;
+	print_asm("popw %%%s", regsl[reg]);
 
 	return 1;
 }
 
 make_helper(pop_rv)
 {
-	return suffix == 'l'?pop_rw(eip):pop_rl(eip);
+	return suffix == 'l'?pop_rl(eip):pop_rw(eip);
 }
 
 make_helper(pop_ds)

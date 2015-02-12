@@ -79,7 +79,7 @@ make_helper(movsx_rmb2rl) {
 		uint8_t tmp1 = swaddr_read(addr, 1);
 		int32_t tmp = *(int8_t *)&tmp1;
 		reg_l(m.reg) = *(uint32_t *)(&tmp);
-		print_asm("movsx %%%s,%%%s", ModR_M_asm, regsl[m.reg]);
+		print_asm("movsx %s,%%%s", ModR_M_asm, regsl[m.reg]);
 
 		return 2+len;
 	}
@@ -105,7 +105,7 @@ make_helper(movsx_rmw2rl) {
 		uint16_t tmp1 = swaddr_read(addr, 2);
 		int32_t tmp = *(int16_t *)&tmp1;
 		reg_l(m.reg) = *(uint32_t *)(&tmp);
-		print_asm("movsx %%%s,%%%s", ModR_M_asm, regsl[m.reg]);
+		print_asm("movsx %s,%%%s", ModR_M_asm, regsl[m.reg]);
 
 		return 2+len;
 	}
@@ -136,14 +136,14 @@ make_helper(movzx_rmb2rl) {
 	m.val = instr_fetch(eip + 2, 4);
 	if (m.mod == 3) {
 		reg_l(m.reg) = reg_b(m.R_M);
-		print_asm("movsx %%%s,%%%s", regsb[m.R_M], regsl[m.reg]);
+		print_asm("movzx %%%s,%%%s", regsb[m.R_M], regsl[m.reg]);
 
 		return 3;
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+2, &addr);
 		reg_l(m.reg) = swaddr_read(addr, 1);
-		print_asm("movsx %%%s,%%%s", ModR_M_asm, regsl[m.reg]);
+		print_asm("movzx %s,%%%s", ModR_M_asm, regsl[m.reg]);
 
 		return 2+len;
 	}
@@ -159,14 +159,14 @@ make_helper(movzx_rmw2rl) {
 	m.val = instr_fetch(eip + 2, 4);
 	if (m.mod == 3) {
 		reg_l(m.reg) = reg_w(m.R_M);
-		print_asm("movsx %%%s,%%%s", regsw[m.R_M], regsl[m.reg]);
+		print_asm("movzx %%%s,%%%s", regsw[m.R_M], regsl[m.reg]);
 
 		return 3;
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+2, &addr);
 		reg_l(m.reg) = swaddr_read(addr, 2);
-		print_asm("movsx %%%s,%%%s", ModR_M_asm, regsl[m.reg]);
+		print_asm("movzx %s,%%%s", ModR_M_asm, regsl[m.reg]);
 
 		return 2+len;
 	}

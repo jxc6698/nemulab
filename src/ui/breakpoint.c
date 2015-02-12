@@ -70,6 +70,7 @@ void del_bp(uint32_t index)
     if (cur == NULL)
         printf("no breakpoint index %d\n", index);
     else {
+		swaddr_write(cur->addr, 1, cur->ins_f_bit);
         if (!prev) {
             head = head->next;
             cur->next = free_;
