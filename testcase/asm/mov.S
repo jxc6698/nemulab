@@ -181,4 +181,5 @@ _start:
 	movb 8192(%ecx, %ebx, 4), %dh
 
 	HIT_GOOD_TRAP
+	ret
 

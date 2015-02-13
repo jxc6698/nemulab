@@ -7,8 +7,6 @@
 
 #ifndef __ASSEMBLER__
 
-#include "link.h"
-
 #define HIT_GOOD_TRAP \
 	asm volatile(".byte 0x82" : : "a" (0))
 
@@ -21,6 +19,8 @@
 	} while(0)
 
 #else
+
+
 
 #define HIT_GOOD_TRAP \
 	movl $0, %eax; \
@@ -35,5 +35,21 @@
 	je concat(label,__LINE__); HIT_BAD_TRAP; concat(label,__LINE__):
 
 #endif
+
+
+#define NEWLOADER
+#ifdef NEWLOADER
+
+#undef HIT_GOOD_TRAP
+#undef HIT_BAD_TRAP
+
+#define HIT_GOOD_TRAP 
+
+#define HIT_BAD_TRAP 
+	
+/* NEWLOADER */
+#endif
+
+
 
 #endif

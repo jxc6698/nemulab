@@ -44,9 +44,10 @@ make_helper(call_rmw)
 		cpu.esp -= 2;
 		swaddr_write(cpu.esp, 2, cpu.eip+2);
 		disp.unsign16 = reg_w(m.reg);
-		cpu.eip += disp.sign16;
+		cpu.eip = disp.sign16;
 		cpu.eip &= 0x0000ffff;
 		print_asm("call 0x%x", cpu.eip);
+		cpu.eip -= (2);
 
 		return 2;
 	} else {
@@ -55,9 +56,10 @@ make_helper(call_rmw)
 		cpu.esp -= 2;
 		swaddr_write(cpu.esp, 2, cpu.eip+1+len);
 		disp.unsign16 = instr_fetch(eip+1+len, 2);
-		cpu.eip += disp.sign16;
+		cpu.eip = disp.sign16;
 		cpu.eip &= 0x0000ffff;
 		print_asm("call 0x%x", cpu.eip);
+		cpu.eip -= (1+len);
 
 		return 1+len;
 	}
@@ -73,8 +75,9 @@ make_helper(call_rml)
 		cpu.esp -= 4;
 		swaddr_write(cpu.esp, 4, cpu.eip+2);
 		disp.unsign32 = reg_l(m.reg);
-		cpu.eip += disp.sign32;
+		cpu.eip = disp.unsign32;
 		print_asm("call 0x%x", cpu.eip);
+		cpu.eip -= 2;
 
 		return 2;
 	} else {
@@ -82,9 +85,10 @@ make_helper(call_rml)
 		int len = read_ModR_M(eip+1, &addr);
 		cpu.esp -= 4;
 		swaddr_write(cpu.esp, 4, cpu.eip+1+len);
-		disp.unsign32 = instr_fetch(eip+1+len, 4);
-		cpu.eip += disp.sign32;
+		disp.unsign32 = swaddr_read(addr, 4);
+		cpu.eip = disp.unsign32;
 		print_asm("call 0x%x", cpu.eip);
+		cpu.eip -= (1+len);
 
 		return 1+len;
 	}

@@ -56,10 +56,10 @@ make_helper(jmp_rmw)
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+1, &addr);
-		disp.unsign16 = instr_fetch(eip+1+len, 2);
+		disp.unsign16 = swaddr_read(addr, 2);
 		cpu.eip = disp.sign16;
 		cpu.eip &= 0x0000ffff;
-		print_asm("jmp %x", cpu.eip+len+1);
+		print_asm("jmp %x", cpu.eip);
 		cpu.eip -= (1+len);
 
 		return 1+len;
@@ -74,17 +74,17 @@ make_helper(jmp_rml)
 	
 	if (m.mod == 3) {
 		disp.unsign32 = reg_l(m.R_M);
-		cpu.eip = disp.sign32;
-		print_asm("jmp %x", cpu.eip+2);
+		cpu.eip = disp.unsign32;
+		print_asm("jmp %x", cpu.eip);
 		cpu.eip -= 2;
 
 		return 2;
 	} else {
 		swaddr_t addr;
 		int len = read_ModR_M(eip+1, &addr);
-		disp.unsign32 = instr_fetch(eip+1+len, 4);
-		cpu.eip = disp.sign32;
-		print_asm("jmp %x", cpu.eip+1+len);
+		disp.unsign32 = swaddr_read(addr, 4);
+		cpu.eip = disp.unsign32;
+		print_asm("jmp %x", cpu.eip);
 		cpu.eip -= (1+len);
 
 		return 1+len;
