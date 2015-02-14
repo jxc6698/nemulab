@@ -1,4 +1,4 @@
-(nemu) c[Kr
+(nemu) r
   100000:   bd 00 00 00 00                        movl $0x0,%ebp
   100005:   bc 00 00 00 08                        movl $0x8000000,%esp
   10000a:   e9 c1 00 00 00                        jmp 1000d0

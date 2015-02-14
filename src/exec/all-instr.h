@@ -2,30 +2,12 @@
 #include "cpu/modrm.h"
 
 #include "data-mov/mov.h"
-#include "ins-push/push.h"
-#include "ins-cmp/cmp.h"
-#include "ins-xchg/xchg.h"
-#include "ins-pop/pop.h"
-#include "ins-leave/leave.h"
-
-#include "ins-add/add.h"
-#include "ins-add/adc.h"
-
-#include "ins-inc/inc.h"
-#include "ins-dec/dec.h"
-
-#include "ins-sub/sub.h"
-#include "ins-sub/sbb.h"
-
-#include "ins-neg/neg.h"
-
-#include "ins-mul/mul.h"
-#include "ins-mul/imul.h"
-
-#include "ins-div/div.h"
-#include "ins-div/idiv.h"
 
 #include "ins-cwd/cwd.h"
+
+#include "data-move-ins/data-move-ins.h"
+
+#include "binary-arit-ins/binary-arit-ins.h"
 
 #include "logical-ins/logical_ins.h"
 
