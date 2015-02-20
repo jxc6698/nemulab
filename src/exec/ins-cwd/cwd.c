@@ -6,7 +6,6 @@
 
 extern char suffix;
 
-
 make_helper(cbw)
 {
 	reg_w(R_AX) = (int8_t)reg_b(R_AL);

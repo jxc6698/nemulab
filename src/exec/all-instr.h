@@ -19,12 +19,20 @@
 
 #include "miscellaneous-ins/miscellaneous-ins.h"
 
+#include "system-ins/system-ins.h"
+
 /* for 0f 
 */
 static make_helper(handle_0f)
 {
 	uint8_t op = instr_fetch(eip+1, 1);
 	switch (op) {
+		case 0x01:
+			return lgdt(eip);
+		case 0x20:
+			return mov_cr2rl(eip);
+		case 0x22:
+			return mov_rl2cr(eip);
 		case 0x81:
 			return jno_relv(eip);
 		case 0x82:

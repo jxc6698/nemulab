@@ -3,6 +3,17 @@
 
 #include "common.h"
 
+
+
+typedef union {
+	struct {
+		uint16_t rpl	:2;
+		uint16_t ti		:1;
+		uint16_t index	:13;
+	};
+	uint16_t val;
+} segment;
+
 /* TODO: Re-organize the 'CPU_state' structure to match
  * the GPR encoding scheme in i386 instruction format.
  * For example, if we access reg_w(R_BX) we will get the 'bx' register;
@@ -31,12 +42,16 @@ typedef struct {
     };
 	union {
 		struct {
-			
+			segment es, cs, ss, ds, fs, gs;
 		};
-		struct {
-			uint16_t ss, cs;
-		};
+		uint16_t sg[6];
 	};
+	/* cs, ss ,ds , es, fs, gs base addr
+	 * should be 8 byte of segment selector value
+	 * now is base addr
+	 */
+	swaddr_t csValue, ssValue, dsValue, esValue, fsValue, gsValue;
+
 	union {
 		struct {
 			uint8_t Cf		:1;
@@ -64,7 +79,19 @@ typedef struct {
 
 	swaddr_t eip;
 
+	/*   */
 	swaddr_t breakpointAddr;
+
+	union {
+		struct {
+			uint32_t base	:32;
+			uint32_t limit	:16;
+		};
+	} gdt;
+	
+	union {
+		uint32_t val;
+	} cr0;
 
 } CPU_state;
 
@@ -73,6 +100,7 @@ extern CPU_state cpu;
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };
 enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
+enum { R_ES, R_CS, R_SS, R_DS, R_FS, R_GS };
 
 #define reg_l(index) (cpu.gpr[index]._32)
 #define reg_w(index) (cpu.gpr[index]._16)
@@ -81,6 +109,7 @@ enum { R_AL, R_CL, R_DL, R_BL, R_AH, R_CH, R_DH, R_BH };
 extern const char* regsl[];
 extern const char* regsw[];
 extern const char* regsb[];
+extern const char* regss[];
 
 #define set_eflags(cpu, value) (cpu.eflags.val = value);
 #define set_flags(cpu, value) (cpu.eflags.flags = value)

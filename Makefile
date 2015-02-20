@@ -16,9 +16,9 @@ OBJS    = $(CFILES:.c=.o)
 
 # test files
 # lab 1 testfile
-TESTFILE = testcase/asm/mov
+#TESTFILE = testcase/asm/mov
 # lab 2 testfile
-# TESTFILE = testcase/c/switch
+TESTFILE = testcase/c/switch
 C_TEST_FILE_LIST = $(shell find testcase/c/ -name "*.c")
 S_TEST_FILE_LIST = $(shell find testcase/asm/ -name "*.S")
 TEST_FILE_LIST = $(C_TEST_FILE_LIST:.c=) $(S_TEST_FILE_LIST:.S=)
@@ -32,7 +32,7 @@ nemu: $(OBJS)
 $(TEST_FILE_LIST):
 	cd `dirname $@` && make
 
-LOADER_DIR=myloader
+LOADER_DIR=kernel
 loader:
 	cd $(LOADER_DIR) && make
 	objcopy -S -O binary $(LOADER_DIR)/loader loader

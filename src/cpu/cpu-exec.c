@@ -28,6 +28,7 @@ void restart() {
     cpu.eflags.val = 0x02;
 	cpu.esp = 0x100000;
 	cpu.ebp = 0;
+	cpu.cr0.val = 0;
 
 	init_dram();
 }
@@ -54,11 +55,12 @@ void cpu_exec(volatile uint32_t n) {
 			break;
 		case BREAK: 
 			stop_state = BREAK1;
-			cpu.breakpointAddr = cpu.eip;
+//			cpu.breakpointAddr = cpu.eip;
 			return;
 		case BREAK1:
 			stop_state = NOBREAK;
-			reset_bp(cpu.breakpointAddr);
+//			reset_bp(cpu.breakpointAddr);
+			reset_bp(cpu.eip);
 			break;
 		default :
 			assert(0);

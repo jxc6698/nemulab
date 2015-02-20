@@ -21,4 +21,11 @@ make_helper(movsx_rmw2rl);
 make_helper(movzx_rmb2rv);
 make_helper(movzx_rmw2rl);
 
+/* move special reg */
+make_helper(mov_cr2rl);
+make_helper(mov_rl2cr);
+
+make_helper(mov_rm2sg);
+make_helper(mov_sg2rm);
+
 #endif

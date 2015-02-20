@@ -96,3 +96,35 @@ make_helper(jmp_rmv)
 	return suffix=='l'?jmp_rml(eip):jmp_rmw(eip);
 }
 
+make_helper(ljmp_w)
+{
+	assert(0);
+	return 1+4;
+}
+
+make_helper(ljmp_l)
+{
+	segment cs;
+	uint32_t eipt;
+	swaddr_t base;
+	eipt = instr_fetch(eip+1, 4);
+	cs.val = instr_fetch(eip+5, 2);
+
+	swaddr_t addr = cpu.gdt.base + cs.val;//8*cs.index;
+
+	base = swaddr_read(addr+2, 4)&0x00ffffff;
+	base += swaddr_read(addr+7, 1) << 24;
+	cpu.csValue = base;
+
+	assert(base == 0);
+	cpu.eip = eipt - 7;
+	cpu.cs.val = cs.val;
+	print_asm("ljmp $%x,$%x\n", cs.val, eipt);
+
+	return 1+6;
+}
+
+make_helper(ljmp)
+{
+	return suffix=='l'?ljmp_l(eip):ljmp_w(eip);
+}

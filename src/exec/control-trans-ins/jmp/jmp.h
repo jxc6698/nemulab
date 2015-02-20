@@ -7,4 +7,7 @@ make_helper(jmp_relv);
 
 make_helper(jmp_rmv);
 
+
+make_helper(ljmp);
+
 #endif

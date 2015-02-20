@@ -43,7 +43,7 @@ make_helper(call_rmw)
 	if (m.mod == 3) {
 		cpu.esp -= 2;
 		swaddr_write(cpu.esp, 2, cpu.eip+2);
-		disp.unsign16 = reg_w(m.reg);
+		disp.unsign16 = reg_w(m.R_M);
 		cpu.eip = disp.sign16;
 		cpu.eip &= 0x0000ffff;
 		print_asm("call 0x%x", cpu.eip);
@@ -74,7 +74,7 @@ make_helper(call_rml)
 	if (m.mod == 3) {
 		cpu.esp -= 4;
 		swaddr_write(cpu.esp, 4, cpu.eip+2);
-		disp.unsign32 = reg_l(m.reg);
+		disp.unsign32 = reg_l(m.R_M);
 		cpu.eip = disp.unsign32;
 		print_asm("call 0x%x", cpu.eip);
 		cpu.eip -= 2;

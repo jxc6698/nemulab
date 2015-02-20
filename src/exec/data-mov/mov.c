@@ -172,3 +172,75 @@ make_helper(movzx_rmw2rl) {
 	}
 }
 
+make_helper(mov_cr2rl)
+{
+	ModR_M m;
+	m.val = instr_fetch(eip+2, 1);
+	switch(m.R_M) {
+		case 0:
+			reg_l(m.reg) = cpu.cr0.val;
+			break;
+		default:
+			printf("mov crx to reg \n");
+			assert(0);
+	}
+	print_asm("mov %%cr%d, %%%s\n", m.R_M, regsl[m.reg]);
+	return 3;
+}
+
+make_helper(mov_rl2cr)
+{
+	ModR_M m;
+	m.val = instr_fetch(eip+2, 1);
+	switch(m.R_M) {
+		case 0:
+			cpu.cr0.val = reg_l(m.reg);
+			break;
+		default:
+			printf("mov crx to reg \n");
+			assert(0);
+	}
+	print_asm("mov %%%s, %%cr%d\n", regsl[m.reg], m.R_M);
+	return 3;
+}
+
+make_helper(mov_rm2sg)
+{
+	ModR_M m;
+	m.val = instr_fetch(eip+1, 1);
+	if (m.mod == 3) {
+		cpu.sg[m.reg] = reg_l(m.R_M);
+		print_asm("mov %%%s,%%%s", regsl[m.R_M], regss[m.reg]);
+		
+		return 2;
+	} else {
+		swaddr_t addr;
+		int len = read_ModR_M(eip+1, &addr);
+		cpu.sg[m.reg] = swaddr_read(addr, 1);
+		print_asm("mov %%%s,%%%s", ModR_M_asm, regss[m.reg]);
+
+		return 1+len;
+	}
+
+}
+
+make_helper(mov_sg2rm)
+{
+	ModR_M m;
+	m.val = instr_fetch(eip+1, 1);
+	if (m.mod == 3) {
+		reg_l(m.R_M) = cpu.sg[m.reg];
+		print_asm("mov %%%s,%%%s", regsl[m.R_M], regss[m.reg]);
+		
+		return 2;
+	} else {
+		swaddr_t addr;
+		int len = read_ModR_M(eip+1, &addr);
+		swaddr_write(addr, 4, cpu.sg[m.reg]);
+
+		print_asm("mov %%%s,%%%s", ModR_M_asm, regss[m.reg]);
+
+		return 1+len;
+	}
+
+}
