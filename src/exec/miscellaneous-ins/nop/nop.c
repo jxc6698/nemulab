@@ -6,5 +6,6 @@
 
 make_helper(nop)
 {
+	print_asm("nop");
 	return 1;
 }

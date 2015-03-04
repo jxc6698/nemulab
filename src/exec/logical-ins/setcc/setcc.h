@@ -18,5 +18,4 @@ make_helper(seto_rmb);
 make_helper(setp_rmb);
 make_helper(sets_rmb);
 
-
 #endif

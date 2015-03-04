@@ -7,5 +7,6 @@
 make_helper(std)
 {
 	set_df(cpu);
+	print_asm("std");
 	return 1;
 }

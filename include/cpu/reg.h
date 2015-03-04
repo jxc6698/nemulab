@@ -87,15 +87,48 @@ typedef struct {
 			uint32_t base	:32;
 			uint32_t limit	:16;
 		};
-	} gdt;
+	} gdtr;
+
+	union{
+		struct {
+			uint32_t base	:32;
+			uint32_t limit	:16;
+		};
+	} idtr;
 	
 	union {
+		struct {
+			uint32_t pe		:1;
+			uint32_t mp		:1;
+			uint32_t em		:1;
+			uint32_t ts		:1;
+			uint32_t et		:1;
+			uint32_t reserved	:26;
+			uint32_t pg		:1;
+		};
 		uint32_t val;
 	} cr0;
+
+	/* for page fault handler */
+	union {
+		hwaddr_t addr;
+	} cr2;
+
+	union {
+		struct {
+			uint32_t reserved	:2;
+			uint32_t addr	:30;
+		};
+		hwaddr_t val;
+	} cr3;
+
+	bool INTR;
 
 } CPU_state;
 
 extern CPU_state cpu;
+
+enum { V_PROTECT, V_8086 };
 
 enum { R_EAX, R_ECX, R_EDX, R_EBX, R_ESP, R_EBP, R_ESI, R_EDI };
 enum { R_AX, R_CX, R_DX, R_BX, R_SP, R_BP, R_SI, R_DI };

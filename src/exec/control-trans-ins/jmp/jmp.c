@@ -110,7 +110,7 @@ make_helper(ljmp_l)
 	eipt = instr_fetch(eip+1, 4);
 	cs.val = instr_fetch(eip+5, 2);
 
-	swaddr_t addr = cpu.gdt.base + cs.val;//8*cs.index;
+	swaddr_t addr = cpu.gdtr.base + cs.val;//8*cs.index;
 
 	base = swaddr_read(addr+2, 4)&0x00ffffff;
 	base += swaddr_read(addr+7, 1) << 24;

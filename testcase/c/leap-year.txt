@@ -4,60 +4,60 @@ leap-year:     file format elf32-i386
 
 Disassembly of section .text:
 
-00800094 <is_leap_year>:
-  800094:	55                   	push   %ebp
-  800095:	89 e5                	mov    %esp,%ebp
-  800097:	8b 45 08             	mov    0x8(%ebp),%eax
-  80009a:	83 e0 03             	and    $0x3,%eax
-  80009d:	85 c0                	test   %eax,%eax
-  80009f:	75 23                	jne    8000c4 <is_leap_year+0x30>
-  8000a1:	8b 4d 08             	mov    0x8(%ebp),%ecx
-  8000a4:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
-  8000a9:	89 c8                	mov    %ecx,%eax
-  8000ab:	f7 ea                	imul   %edx
-  8000ad:	c1 fa 05             	sar    $0x5,%edx
-  8000b0:	89 c8                	mov    %ecx,%eax
-  8000b2:	c1 f8 1f             	sar    $0x1f,%eax
-  8000b5:	29 c2                	sub    %eax,%edx
-  8000b7:	89 d0                	mov    %edx,%eax
-  8000b9:	6b c0 64             	imul   $0x64,%eax,%eax
-  8000bc:	29 c1                	sub    %eax,%ecx
-  8000be:	89 c8                	mov    %ecx,%eax
-  8000c0:	85 c0                	test   %eax,%eax
-  8000c2:	75 26                	jne    8000ea <is_leap_year+0x56>
-  8000c4:	8b 4d 08             	mov    0x8(%ebp),%ecx
-  8000c7:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
-  8000cc:	89 c8                	mov    %ecx,%eax
-  8000ce:	f7 ea                	imul   %edx
-  8000d0:	c1 fa 07             	sar    $0x7,%edx
-  8000d3:	89 c8                	mov    %ecx,%eax
-  8000d5:	c1 f8 1f             	sar    $0x1f,%eax
-  8000d8:	29 c2                	sub    %eax,%edx
-  8000da:	89 d0                	mov    %edx,%eax
-  8000dc:	69 c0 90 01 00 00    	imul   $0x190,%eax,%eax
-  8000e2:	29 c1                	sub    %eax,%ecx
-  8000e4:	89 c8                	mov    %ecx,%eax
-  8000e6:	85 c0                	test   %eax,%eax
-  8000e8:	75 07                	jne    8000f1 <is_leap_year+0x5d>
-  8000ea:	b8 01 00 00 00       	mov    $0x1,%eax
-  8000ef:	eb 05                	jmp    8000f6 <is_leap_year+0x62>
-  8000f1:	b8 00 00 00 00       	mov    $0x0,%eax
-  8000f6:	5d                   	pop    %ebp
-  8000f7:	c3                   	ret    
+08048094 <is_leap_year>:
+ 8048094:	55                   	push   %ebp
+ 8048095:	89 e5                	mov    %esp,%ebp
+ 8048097:	8b 45 08             	mov    0x8(%ebp),%eax
+ 804809a:	83 e0 03             	and    $0x3,%eax
+ 804809d:	85 c0                	test   %eax,%eax
+ 804809f:	75 23                	jne    80480c4 <is_leap_year+0x30>
+ 80480a1:	8b 4d 08             	mov    0x8(%ebp),%ecx
+ 80480a4:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
+ 80480a9:	89 c8                	mov    %ecx,%eax
+ 80480ab:	f7 ea                	imul   %edx
+ 80480ad:	c1 fa 05             	sar    $0x5,%edx
+ 80480b0:	89 c8                	mov    %ecx,%eax
+ 80480b2:	c1 f8 1f             	sar    $0x1f,%eax
+ 80480b5:	29 c2                	sub    %eax,%edx
+ 80480b7:	89 d0                	mov    %edx,%eax
+ 80480b9:	6b c0 64             	imul   $0x64,%eax,%eax
+ 80480bc:	29 c1                	sub    %eax,%ecx
+ 80480be:	89 c8                	mov    %ecx,%eax
+ 80480c0:	85 c0                	test   %eax,%eax
+ 80480c2:	75 26                	jne    80480ea <is_leap_year+0x56>
+ 80480c4:	8b 4d 08             	mov    0x8(%ebp),%ecx
+ 80480c7:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
+ 80480cc:	89 c8                	mov    %ecx,%eax
+ 80480ce:	f7 ea                	imul   %edx
+ 80480d0:	c1 fa 07             	sar    $0x7,%edx
+ 80480d3:	89 c8                	mov    %ecx,%eax
+ 80480d5:	c1 f8 1f             	sar    $0x1f,%eax
+ 80480d8:	29 c2                	sub    %eax,%edx
+ 80480da:	89 d0                	mov    %edx,%eax
+ 80480dc:	69 c0 90 01 00 00    	imul   $0x190,%eax,%eax
+ 80480e2:	29 c1                	sub    %eax,%ecx
+ 80480e4:	89 c8                	mov    %ecx,%eax
+ 80480e6:	85 c0                	test   %eax,%eax
+ 80480e8:	75 07                	jne    80480f1 <is_leap_year+0x5d>
+ 80480ea:	b8 01 00 00 00       	mov    $0x1,%eax
+ 80480ef:	eb 05                	jmp    80480f6 <is_leap_year+0x62>
+ 80480f1:	b8 00 00 00 00       	mov    $0x0,%eax
+ 80480f6:	5d                   	pop    %ebp
+ 80480f7:	c3                   	ret    
 
-008000f8 <main>:
-  8000f8:	55                   	push   %ebp
-  8000f9:	89 e5                	mov    %esp,%ebp
-  8000fb:	83 ec 14             	sub    $0x14,%esp
-  8000fe:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
-  800105:	eb 14                	jmp    80011b <main+0x23>
-  800107:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  80010a:	05 62 07 00 00       	add    $0x762,%eax
-  80010f:	89 04 24             	mov    %eax,(%esp)
-  800112:	e8 7d ff ff ff       	call   800094 <is_leap_year>
-  800117:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  80011b:	83 7d fc 7c          	cmpl   $0x7c,-0x4(%ebp)
-  80011f:	7e e6                	jle    800107 <main+0xf>
-  800121:	b8 00 00 00 00       	mov    $0x0,%eax
-  800126:	c9                   	leave  
-  800127:	c3                   	ret    
+080480f8 <main>:
+ 80480f8:	55                   	push   %ebp
+ 80480f9:	89 e5                	mov    %esp,%ebp
+ 80480fb:	83 ec 14             	sub    $0x14,%esp
+ 80480fe:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+ 8048105:	eb 14                	jmp    804811b <main+0x23>
+ 8048107:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 804810a:	05 62 07 00 00       	add    $0x762,%eax
+ 804810f:	89 04 24             	mov    %eax,(%esp)
+ 8048112:	e8 7d ff ff ff       	call   8048094 <is_leap_year>
+ 8048117:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 804811b:	83 7d fc 7c          	cmpl   $0x7c,-0x4(%ebp)
+ 804811f:	7e e6                	jle    8048107 <main+0xf>
+ 8048121:	b8 00 00 00 00       	mov    $0x0,%eax
+ 8048126:	c9                   	leave  
+ 8048127:	c3                   	ret    

@@ -4,60 +4,60 @@ bubble-sort:     file format elf32-i386
 
 Disassembly of section .text:
 
-00800094 <bubble_sort>:
-  800094:	55                   	push   %ebp
-  800095:	89 e5                	mov    %esp,%ebp
-  800097:	83 ec 10             	sub    $0x10,%esp
-  80009a:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
-  8000a1:	eb 6d                	jmp    800110 <bubble_sort+0x7c>
-  8000a3:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
-  8000aa:	eb 53                	jmp    8000ff <bubble_sort+0x6b>
-  8000ac:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000af:	8b 14 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%edx
-  8000b6:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000b9:	83 c0 01             	add    $0x1,%eax
-  8000bc:	8b 04 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%eax
-  8000c3:	39 c2                	cmp    %eax,%edx
-  8000c5:	7e 34                	jle    8000fb <bubble_sort+0x67>
-  8000c7:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000ca:	8b 04 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%eax
-  8000d1:	89 45 f4             	mov    %eax,-0xc(%ebp)
-  8000d4:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000d7:	83 c0 01             	add    $0x1,%eax
-  8000da:	8b 14 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%edx
-  8000e1:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000e4:	89 14 85 c0 11 80 00 	mov    %edx,0x8011c0(,%eax,4)
-  8000eb:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000ee:	8d 50 01             	lea    0x1(%eax),%edx
-  8000f1:	8b 45 f4             	mov    -0xc(%ebp),%eax
-  8000f4:	89 04 95 c0 11 80 00 	mov    %eax,0x8011c0(,%edx,4)
-  8000fb:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  8000ff:	b8 63 00 00 00       	mov    $0x63,%eax
-  800104:	2b 45 f8             	sub    -0x8(%ebp),%eax
-  800107:	3b 45 fc             	cmp    -0x4(%ebp),%eax
-  80010a:	7f a0                	jg     8000ac <bubble_sort+0x18>
-  80010c:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
-  800110:	83 7d f8 63          	cmpl   $0x63,-0x8(%ebp)
-  800114:	7e 8d                	jle    8000a3 <bubble_sort+0xf>
-  800116:	c9                   	leave  
-  800117:	c3                   	ret    
+08048094 <bubble_sort>:
+ 8048094:	55                   	push   %ebp
+ 8048095:	89 e5                	mov    %esp,%ebp
+ 8048097:	83 ec 10             	sub    $0x10,%esp
+ 804809a:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+ 80480a1:	eb 6d                	jmp    8048110 <bubble_sort+0x7c>
+ 80480a3:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+ 80480aa:	eb 53                	jmp    80480ff <bubble_sort+0x6b>
+ 80480ac:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480af:	8b 14 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%edx
+ 80480b6:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480b9:	83 c0 01             	add    $0x1,%eax
+ 80480bc:	8b 04 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%eax
+ 80480c3:	39 c2                	cmp    %eax,%edx
+ 80480c5:	7e 34                	jle    80480fb <bubble_sort+0x67>
+ 80480c7:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480ca:	8b 04 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%eax
+ 80480d1:	89 45 f4             	mov    %eax,-0xc(%ebp)
+ 80480d4:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480d7:	83 c0 01             	add    $0x1,%eax
+ 80480da:	8b 14 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%edx
+ 80480e1:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480e4:	89 14 85 c0 91 04 08 	mov    %edx,0x80491c0(,%eax,4)
+ 80480eb:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480ee:	8d 50 01             	lea    0x1(%eax),%edx
+ 80480f1:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 80480f4:	89 04 95 c0 91 04 08 	mov    %eax,0x80491c0(,%edx,4)
+ 80480fb:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 80480ff:	b8 63 00 00 00       	mov    $0x63,%eax
+ 8048104:	2b 45 f8             	sub    -0x8(%ebp),%eax
+ 8048107:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+ 804810a:	7f a0                	jg     80480ac <bubble_sort+0x18>
+ 804810c:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
+ 8048110:	83 7d f8 63          	cmpl   $0x63,-0x8(%ebp)
+ 8048114:	7e 8d                	jle    80480a3 <bubble_sort+0xf>
+ 8048116:	c9                   	leave  
+ 8048117:	c3                   	ret    
 
-00800118 <main>:
-  800118:	55                   	push   %ebp
-  800119:	89 e5                	mov    %esp,%ebp
-  80011b:	83 ec 10             	sub    $0x10,%esp
-  80011e:	e8 71 ff ff ff       	call   800094 <bubble_sort>
-  800123:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
-  80012a:	eb 04                	jmp    800130 <main+0x18>
-  80012c:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  800130:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
-  800134:	7e f6                	jle    80012c <main+0x14>
-  800136:	e8 59 ff ff ff       	call   800094 <bubble_sort>
-  80013b:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
-  800142:	eb 04                	jmp    800148 <main+0x30>
-  800144:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  800148:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
-  80014c:	7e f6                	jle    800144 <main+0x2c>
-  80014e:	b8 00 00 00 00       	mov    $0x0,%eax
-  800153:	c9                   	leave  
-  800154:	c3                   	ret    
+08048118 <main>:
+ 8048118:	55                   	push   %ebp
+ 8048119:	89 e5                	mov    %esp,%ebp
+ 804811b:	83 ec 10             	sub    $0x10,%esp
+ 804811e:	e8 71 ff ff ff       	call   8048094 <bubble_sort>
+ 8048123:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+ 804812a:	eb 04                	jmp    8048130 <main+0x18>
+ 804812c:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 8048130:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
+ 8048134:	7e f6                	jle    804812c <main+0x14>
+ 8048136:	e8 59 ff ff ff       	call   8048094 <bubble_sort>
+ 804813b:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+ 8048142:	eb 04                	jmp    8048148 <main+0x30>
+ 8048144:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 8048148:	83 7d fc 63          	cmpl   $0x63,-0x4(%ebp)
+ 804814c:	7e f6                	jle    8048144 <main+0x2c>
+ 804814e:	b8 00 00 00 00       	mov    $0x0,%eax
+ 8048153:	c9                   	leave  
+ 8048154:	c3                   	ret    

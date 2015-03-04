@@ -28,34 +28,34 @@ make_helper(movs_ml2ml)
 */
 make_helper(movsb)
 {
-	uint8_t u8 = swaddr_read(reg_w(R_SI),1);
-	swaddr_write(reg_w(R_DI), 1, u8);
+	uint8_t u8 = swaddr_read(reg_l(R_ESI),1);
+	swaddr_write(reg_l(R_EDI), 1, u8);
 	int t;
 	t = test_df(cpu)?-1:1;
-	reg_w(R_SI) += t;
-	reg_w(R_DI) += t;
+	reg_l(R_ESI) += t;
+	reg_l(R_EDI) += t;
 
 	if (repsuffix)
-		print_asm("rep movsb %%ds:[%%si],%%es:[%%di]");
+		print_asm("rep movsb %%ds:[%%esi],%%es:[%%edi]");
 	else
-		print_asm("movsb %%ds:[%%si],%%es:[%%di]");
+		print_asm("movsb %%ds:[%%esi],%%es:[%%edi]");
 
 	return 1;
 }
 
 make_helper(movsw)
 {
-	uint16_t u16 = swaddr_read(reg_w(R_SI),2);
-	swaddr_write(reg_w(R_DI), 2, u16);
+	uint16_t u16 = swaddr_read(reg_l(R_ESI),2);
+	swaddr_write(reg_l(R_EDI), 2, u16);
 	int t;
 	t = test_df(cpu)?-2:2;
-	reg_w(R_SI) += t;
-	reg_w(R_DI) += t;
+	reg_l(R_ESI) += t;
+	reg_l(R_EDI) += t;
 	
 	if (repsuffix)
-		print_asm("rep movsw %%ds:[%%si],%%es:[%%di]");
+		print_asm("rep movsw %%ds:[%%esi],%%es:[%%edi]");
 	else
-		print_asm("movsb %%ds:[%%si],%%es:[%%di]");
+		print_asm("movsb %%ds:[%%esi],%%es:[%%edi]");
 
 	return 1;
 }

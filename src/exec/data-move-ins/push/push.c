@@ -67,8 +67,8 @@ make_helper(push_ib)
 {
 	uint8_t i8 = instr_fetch(eip+1, 1);
 	print_asm("pushb 0x%2x", i8);
-	cpu.esp -= 1;
-	swaddr_write(cpu.esp, 1, i8);
+	cpu.esp -= 4;
+	swaddr_write(cpu.esp, 4, i8);
 
 	return 2;
 }
@@ -76,27 +76,26 @@ make_helper(push_ib)
 /* push im16 or im32 */
 make_helper(push_iv)
 {
-	int insLen=2;
 	int32_t i32;
 	int16_t i16;
 
 	if (suffix == 'l') {
-		insLen += 4;
-		i32 = instr_fetch(eip+2, 4);
+		i32 = instr_fetch(eip+1, 4);
 		print_asm("pushl 0x%2x", i32);
 		cpu.esp -= 4;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 4, i32);
+		
+		return 5;
 	} else { /* 'w' */
-		insLen += 2;
-		i16 = instr_fetch(eip+2, 2);
+		i16 = instr_fetch(eip+1, 2);
 		print_asm("pushw 0x%2x", i16);
 		cpu.esp -= 2;
 		/* UNFIXED: address should be [ss:esp] */
 		swaddr_write(cpu.esp, 2, i16);
-	}
 
-	return insLen;
+		return 3;
+	}
 }
 
 make_helper(push_cs)
@@ -153,6 +152,7 @@ make_helper(push_a)
 		cpu.esp -= 2;
 		swaddr_write(cpu.esp, 2, reg_w(i));
 	}
+	print_asm("pusha");
 
 	return 1;
 }
@@ -164,6 +164,7 @@ make_helper(push_ad)
 		cpu.esp -= 4;
 		swaddr_write(cpu.esp, 4, reg_l(i));
 	}
+	print_asm("pushad");
 	return 1;
 }
 

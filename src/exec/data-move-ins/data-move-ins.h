@@ -6,4 +6,6 @@
 #include "leave/leave.h"
 #include "xchg/xchg.h"
 
+#include "cmovcc/cmovcc.h"
+
 #endif

@@ -4,94 +4,94 @@ shuixianhua:     file format elf32-i386
 
 Disassembly of section .text:
 
-00800094 <cube>:
-  800094:	55                   	push   %ebp
-  800095:	89 e5                	mov    %esp,%ebp
-  800097:	8b 45 08             	mov    0x8(%ebp),%eax
-  80009a:	0f af 45 08          	imul   0x8(%ebp),%eax
-  80009e:	0f af 45 08          	imul   0x8(%ebp),%eax
-  8000a2:	5d                   	pop    %ebp
-  8000a3:	c3                   	ret    
+08048094 <cube>:
+ 8048094:	55                   	push   %ebp
+ 8048095:	89 e5                	mov    %esp,%ebp
+ 8048097:	8b 45 08             	mov    0x8(%ebp),%eax
+ 804809a:	0f af 45 08          	imul   0x8(%ebp),%eax
+ 804809e:	0f af 45 08          	imul   0x8(%ebp),%eax
+ 80480a2:	5d                   	pop    %ebp
+ 80480a3:	c3                   	ret    
 
-008000a4 <main>:
-  8000a4:	55                   	push   %ebp
-  8000a5:	89 e5                	mov    %esp,%ebp
-  8000a7:	53                   	push   %ebx
-  8000a8:	83 ec 24             	sub    $0x24,%esp
-  8000ab:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
-  8000b2:	c7 45 f8 64 00 00 00 	movl   $0x64,-0x8(%ebp)
-  8000b9:	e9 b8 00 00 00       	jmp    800176 <main+0xd2>
-  8000be:	8b 4d f8             	mov    -0x8(%ebp),%ecx
-  8000c1:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
-  8000c6:	89 c8                	mov    %ecx,%eax
-  8000c8:	f7 ea                	imul   %edx
-  8000ca:	c1 fa 05             	sar    $0x5,%edx
-  8000cd:	89 c8                	mov    %ecx,%eax
-  8000cf:	c1 f8 1f             	sar    $0x1f,%eax
-  8000d2:	29 c2                	sub    %eax,%edx
-  8000d4:	89 d0                	mov    %edx,%eax
-  8000d6:	89 45 f0             	mov    %eax,-0x10(%ebp)
-  8000d9:	8b 4d f8             	mov    -0x8(%ebp),%ecx
-  8000dc:	ba 67 66 66 66       	mov    $0x66666667,%edx
-  8000e1:	89 c8                	mov    %ecx,%eax
-  8000e3:	f7 ea                	imul   %edx
-  8000e5:	c1 fa 02             	sar    $0x2,%edx
-  8000e8:	89 c8                	mov    %ecx,%eax
-  8000ea:	c1 f8 1f             	sar    $0x1f,%eax
-  8000ed:	89 d1                	mov    %edx,%ecx
-  8000ef:	29 c1                	sub    %eax,%ecx
-  8000f1:	ba 67 66 66 66       	mov    $0x66666667,%edx
-  8000f6:	89 c8                	mov    %ecx,%eax
-  8000f8:	f7 ea                	imul   %edx
-  8000fa:	c1 fa 02             	sar    $0x2,%edx
-  8000fd:	89 c8                	mov    %ecx,%eax
-  8000ff:	c1 f8 1f             	sar    $0x1f,%eax
-  800102:	29 c2                	sub    %eax,%edx
-  800104:	89 d0                	mov    %edx,%eax
-  800106:	89 45 ec             	mov    %eax,-0x14(%ebp)
-  800109:	8b 55 ec             	mov    -0x14(%ebp),%edx
-  80010c:	89 d0                	mov    %edx,%eax
-  80010e:	c1 e0 02             	shl    $0x2,%eax
-  800111:	01 d0                	add    %edx,%eax
-  800113:	01 c0                	add    %eax,%eax
-  800115:	29 c1                	sub    %eax,%ecx
-  800117:	89 c8                	mov    %ecx,%eax
-  800119:	89 45 ec             	mov    %eax,-0x14(%ebp)
-  80011c:	8b 4d f8             	mov    -0x8(%ebp),%ecx
-  80011f:	ba 67 66 66 66       	mov    $0x66666667,%edx
-  800124:	89 c8                	mov    %ecx,%eax
-  800126:	f7 ea                	imul   %edx
-  800128:	c1 fa 02             	sar    $0x2,%edx
-  80012b:	89 c8                	mov    %ecx,%eax
-  80012d:	c1 f8 1f             	sar    $0x1f,%eax
-  800130:	29 c2                	sub    %eax,%edx
-  800132:	89 d0                	mov    %edx,%eax
-  800134:	c1 e0 02             	shl    $0x2,%eax
-  800137:	01 d0                	add    %edx,%eax
-  800139:	01 c0                	add    %eax,%eax
-  80013b:	29 c1                	sub    %eax,%ecx
-  80013d:	89 c8                	mov    %ecx,%eax
-  80013f:	89 45 e8             	mov    %eax,-0x18(%ebp)
-  800142:	8b 45 f0             	mov    -0x10(%ebp),%eax
-  800145:	89 04 24             	mov    %eax,(%esp)
-  800148:	e8 47 ff ff ff       	call   800094 <cube>
-  80014d:	89 c3                	mov    %eax,%ebx
-  80014f:	8b 45 ec             	mov    -0x14(%ebp),%eax
-  800152:	89 04 24             	mov    %eax,(%esp)
-  800155:	e8 3a ff ff ff       	call   800094 <cube>
-  80015a:	01 c3                	add    %eax,%ebx
-  80015c:	8b 45 e8             	mov    -0x18(%ebp),%eax
-  80015f:	89 04 24             	mov    %eax,(%esp)
-  800162:	e8 2d ff ff ff       	call   800094 <cube>
-  800167:	01 d8                	add    %ebx,%eax
-  800169:	3b 45 f8             	cmp    -0x8(%ebp),%eax
-  80016c:	75 04                	jne    800172 <main+0xce>
-  80016e:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
-  800172:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
-  800176:	81 7d f8 e7 03 00 00 	cmpl   $0x3e7,-0x8(%ebp)
-  80017d:	0f 8e 3b ff ff ff    	jle    8000be <main+0x1a>
-  800183:	b8 00 00 00 00       	mov    $0x0,%eax
-  800188:	83 c4 24             	add    $0x24,%esp
-  80018b:	5b                   	pop    %ebx
-  80018c:	5d                   	pop    %ebp
-  80018d:	c3                   	ret    
+080480a4 <main>:
+ 80480a4:	55                   	push   %ebp
+ 80480a5:	89 e5                	mov    %esp,%ebp
+ 80480a7:	53                   	push   %ebx
+ 80480a8:	83 ec 24             	sub    $0x24,%esp
+ 80480ab:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+ 80480b2:	c7 45 f8 64 00 00 00 	movl   $0x64,-0x8(%ebp)
+ 80480b9:	e9 b8 00 00 00       	jmp    8048176 <main+0xd2>
+ 80480be:	8b 4d f8             	mov    -0x8(%ebp),%ecx
+ 80480c1:	ba 1f 85 eb 51       	mov    $0x51eb851f,%edx
+ 80480c6:	89 c8                	mov    %ecx,%eax
+ 80480c8:	f7 ea                	imul   %edx
+ 80480ca:	c1 fa 05             	sar    $0x5,%edx
+ 80480cd:	89 c8                	mov    %ecx,%eax
+ 80480cf:	c1 f8 1f             	sar    $0x1f,%eax
+ 80480d2:	29 c2                	sub    %eax,%edx
+ 80480d4:	89 d0                	mov    %edx,%eax
+ 80480d6:	89 45 f0             	mov    %eax,-0x10(%ebp)
+ 80480d9:	8b 4d f8             	mov    -0x8(%ebp),%ecx
+ 80480dc:	ba 67 66 66 66       	mov    $0x66666667,%edx
+ 80480e1:	89 c8                	mov    %ecx,%eax
+ 80480e3:	f7 ea                	imul   %edx
+ 80480e5:	c1 fa 02             	sar    $0x2,%edx
+ 80480e8:	89 c8                	mov    %ecx,%eax
+ 80480ea:	c1 f8 1f             	sar    $0x1f,%eax
+ 80480ed:	89 d1                	mov    %edx,%ecx
+ 80480ef:	29 c1                	sub    %eax,%ecx
+ 80480f1:	ba 67 66 66 66       	mov    $0x66666667,%edx
+ 80480f6:	89 c8                	mov    %ecx,%eax
+ 80480f8:	f7 ea                	imul   %edx
+ 80480fa:	c1 fa 02             	sar    $0x2,%edx
+ 80480fd:	89 c8                	mov    %ecx,%eax
+ 80480ff:	c1 f8 1f             	sar    $0x1f,%eax
+ 8048102:	29 c2                	sub    %eax,%edx
+ 8048104:	89 d0                	mov    %edx,%eax
+ 8048106:	89 45 ec             	mov    %eax,-0x14(%ebp)
+ 8048109:	8b 55 ec             	mov    -0x14(%ebp),%edx
+ 804810c:	89 d0                	mov    %edx,%eax
+ 804810e:	c1 e0 02             	shl    $0x2,%eax
+ 8048111:	01 d0                	add    %edx,%eax
+ 8048113:	01 c0                	add    %eax,%eax
+ 8048115:	29 c1                	sub    %eax,%ecx
+ 8048117:	89 c8                	mov    %ecx,%eax
+ 8048119:	89 45 ec             	mov    %eax,-0x14(%ebp)
+ 804811c:	8b 4d f8             	mov    -0x8(%ebp),%ecx
+ 804811f:	ba 67 66 66 66       	mov    $0x66666667,%edx
+ 8048124:	89 c8                	mov    %ecx,%eax
+ 8048126:	f7 ea                	imul   %edx
+ 8048128:	c1 fa 02             	sar    $0x2,%edx
+ 804812b:	89 c8                	mov    %ecx,%eax
+ 804812d:	c1 f8 1f             	sar    $0x1f,%eax
+ 8048130:	29 c2                	sub    %eax,%edx
+ 8048132:	89 d0                	mov    %edx,%eax
+ 8048134:	c1 e0 02             	shl    $0x2,%eax
+ 8048137:	01 d0                	add    %edx,%eax
+ 8048139:	01 c0                	add    %eax,%eax
+ 804813b:	29 c1                	sub    %eax,%ecx
+ 804813d:	89 c8                	mov    %ecx,%eax
+ 804813f:	89 45 e8             	mov    %eax,-0x18(%ebp)
+ 8048142:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 8048145:	89 04 24             	mov    %eax,(%esp)
+ 8048148:	e8 47 ff ff ff       	call   8048094 <cube>
+ 804814d:	89 c3                	mov    %eax,%ebx
+ 804814f:	8b 45 ec             	mov    -0x14(%ebp),%eax
+ 8048152:	89 04 24             	mov    %eax,(%esp)
+ 8048155:	e8 3a ff ff ff       	call   8048094 <cube>
+ 804815a:	01 c3                	add    %eax,%ebx
+ 804815c:	8b 45 e8             	mov    -0x18(%ebp),%eax
+ 804815f:	89 04 24             	mov    %eax,(%esp)
+ 8048162:	e8 2d ff ff ff       	call   8048094 <cube>
+ 8048167:	01 d8                	add    %ebx,%eax
+ 8048169:	3b 45 f8             	cmp    -0x8(%ebp),%eax
+ 804816c:	75 04                	jne    8048172 <main+0xce>
+ 804816e:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+ 8048172:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
+ 8048176:	81 7d f8 e7 03 00 00 	cmpl   $0x3e7,-0x8(%ebp)
+ 804817d:	0f 8e 3b ff ff ff    	jle    80480be <main+0x1a>
+ 8048183:	b8 00 00 00 00       	mov    $0x0,%eax
+ 8048188:	83 c4 24             	add    $0x24,%esp
+ 804818b:	5b                   	pop    %ebx
+ 804818c:	5d                   	pop    %ebp
+ 804818d:	c3                   	ret    

@@ -15,6 +15,9 @@ optimize:
 
 说不定可以去优化 rep 的操作， 不过看 i386的手册的rep的时钟周期，原来的意思应该是一次一次的去执行
 
+print_bin_instr 函数中 使用了 swaddr_read 读取的指令 的2进制byte，但是这个接口是给数据用的啊， instr_fetch(eip)
+
+
 src/ui/ui.c
 	函数cmd_c中，最后 if (neme_state != END) neme_state=STOP这里的状态转移，
 

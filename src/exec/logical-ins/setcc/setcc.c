@@ -9,14 +9,14 @@ extern char suffix;
 make_helper(seta_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_cf(cpu) && !test_zf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -26,14 +26,14 @@ make_helper(seta_rmb)
 make_helper(setae_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_cf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -43,14 +43,14 @@ make_helper(setae_rmb)
 make_helper(setb_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_cf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -60,14 +60,14 @@ make_helper(setb_rmb)
 make_helper(setbe_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_cf(cpu)||test_zf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -79,14 +79,14 @@ make_helper(setbe_rmb)
 make_helper(sete_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_zf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -96,14 +96,14 @@ make_helper(sete_rmb)
 make_helper(setg_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = ((!test_zf(cpu))&&(get_sf(cpu)==get_of(cpu)))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -113,14 +113,14 @@ make_helper(setg_rmb)
 make_helper(setge_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (get_sf(cpu)==get_of(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -131,14 +131,14 @@ make_helper(setge_rmb)
 make_helper(setl_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (get_sf(cpu)!=get_of(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -148,14 +148,14 @@ make_helper(setl_rmb)
 make_helper(setle_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_zf(cpu)||(get_sf(cpu)!=get_of(cpu)))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -175,14 +175,14 @@ make_helper(setle_rmb)
 make_helper(setne_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_zf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -200,14 +200,14 @@ make_helper(setne_rmb)
 make_helper(setno_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_of(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -217,14 +217,14 @@ make_helper(setno_rmb)
 make_helper(setnp_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_pf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -234,14 +234,14 @@ make_helper(setnp_rmb)
 make_helper(setns_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (!test_sf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -253,14 +253,14 @@ make_helper(setns_rmb)
 make_helper(seto_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_of(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -270,14 +270,14 @@ make_helper(seto_rmb)
 make_helper(setp_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_pf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;
@@ -291,14 +291,14 @@ make_helper(setp_rmb)
 make_helper(sets_rmb)
 {
 	ModR_M m;
-	m.val = instr_fetch(eip+1, 1);
+	m.val = instr_fetch(eip+2, 1);
 	uint8_t val = (test_sf(cpu))?1:0;
 	if (m.mod == 3) {
 		reg_b(m.reg) = val;
-		return 2;
+		return 3;
 	} else {
 		swaddr_t addr;
-		int len = read_ModR_M(eip+1, &addr);
+		int len = read_ModR_M(eip+2, &addr);
 		swaddr_write(addr, 1, val);
 
 		return 1+len;

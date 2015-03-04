@@ -7,6 +7,7 @@
 make_helper(cld)
 {
 	clear_df(cpu);
+	print_asm("cld");
 	return 1;
 }
 

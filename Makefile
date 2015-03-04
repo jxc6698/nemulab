@@ -19,12 +19,14 @@ OBJS    = $(CFILES:.c=.o)
 #TESTFILE = testcase/asm/mov
 # lab 2 testfile
 TESTFILE = testcase/c/switch
+# lab 4 testfile
+#TESTFILE = testcase/game/game
 C_TEST_FILE_LIST = $(shell find testcase/c/ -name "*.c")
 S_TEST_FILE_LIST = $(shell find testcase/asm/ -name "*.S")
 TEST_FILE_LIST = $(C_TEST_FILE_LIST:.c=) $(S_TEST_FILE_LIST:.S=)
 
 nemu: $(OBJS)
-	$(CC) -o nemu $(OBJS) $(CFLAGS) -lreadline
+	$(CC) -o nemu $(OBJS) $(CFLAGS) -lreadline -lSDL
 #	-@git add -A --ignore-errors &> /dev/null # KEEP IT
 #	-@while (test -e .git/index.lock); do sleep 0.1; done # KEEP IT
 #	-@(echo "> compile" && uname -a && uptime && pstree -A) | git commit -F - $(GITFLAGS) # KEEP IT

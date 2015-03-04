@@ -10,6 +10,7 @@ make_helper(xchg_ax2rw)
 	int reg = instr_fetch(eip, 1) & 0x07;
 	reg_w(R_AX) = reg_w(reg);
 	reg_w(reg) = tmp;
+	print_asm("xchgw %%%s, %%%s", regsw[R_AX], regsw[reg]);
 
 	return 1;
 }
@@ -31,6 +32,7 @@ make_helper(xchg_eax2rl)
 	int reg = instr_fetch(eip, 1) & 0x07;
 	reg_l(R_EAX) = reg_l(reg);
 	reg_l(reg) = tmp;
+	print_asm("xchgl %%%s, %%%s", regsl[R_EAX], regsl[reg]);
 
 	return 1;
 }
@@ -48,7 +50,7 @@ make_helper(xchg_rl2eax)
 
 make_helper(xchg_av2rv)
 {
-	return suffix=='l'?xchg_ax2rw(eip):xchg_eax2rl(eip);
+	return suffix=='l'?xchg_eax2rl(eip):xchg_ax2rw(eip);
 }
 
 make_helper(xchg_rmb2rb)
@@ -61,6 +63,7 @@ make_helper(xchg_rmb2rb)
 		tmp = reg_b(m.R_M);
 		reg_b(m.R_M) = reg_b(m.reg);
 		reg_b(m.R_M) = tmp;
+		print_asm("xchgb %%%s, %%%s", regsb[m.reg], regsb[m.R_M]);
 
 		return 2;
 	} else {
@@ -69,6 +72,7 @@ make_helper(xchg_rmb2rb)
 		tmp = swaddr_read(addr, 1);
 		swaddr_write(addr, 1, tmp);
 		reg_b(m.reg) = tmp;
+		print_asm("xchgb %%%s, %s", regsb[m.reg], ModR_M_asm);
 
 		return 1+len;
 	}
@@ -84,6 +88,7 @@ make_helper(xchg_rmw2rw)
 		tmp = reg_w(m.R_M);
 		reg_w(m.R_M) = reg_w(m.reg);
 		reg_w(m.R_M) = tmp;
+		print_asm("xchgw %%%s, %%%s", regsw[m.reg], regsw[m.R_M]);
 
 		return 2;
 	} else {
@@ -92,6 +97,7 @@ make_helper(xchg_rmw2rw)
 		tmp = swaddr_read(addr, 2);
 		swaddr_write(addr, 2, tmp);
 		reg_w(m.reg) = tmp;
+		print_asm("xchgw %%%s, %s", regsw[m.reg], ModR_M_asm);
 
 		return 1+len;
 	}
@@ -107,6 +113,7 @@ make_helper(xchg_rml2rl)
 		tmp = reg_l(m.R_M);
 		reg_l(m.R_M) = reg_l(m.reg);
 		reg_l(m.R_M) = tmp;
+		print_asm("xchgl %%%s, %%%s", regsl[m.reg], regsl[m.R_M]);
 
 		return 2;
 	} else {
@@ -115,6 +122,7 @@ make_helper(xchg_rml2rl)
 		tmp = swaddr_read(addr, 4);
 		swaddr_write(addr, 4, tmp);
 		reg_l(m.reg) = tmp;
+		print_asm("xchgl %%%s, %s", regsl[m.reg], ModR_M_asm);
 
 		return 1+len;
 	}

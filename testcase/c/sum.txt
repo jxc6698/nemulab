@@ -4,18 +4,18 @@ sum:     file format elf32-i386
 
 Disassembly of section .text:
 
-00800074 <main>:
-  800074:	55                   	push   %ebp
-  800075:	89 e5                	mov    %esp,%ebp
-  800077:	83 ec 10             	sub    $0x10,%esp
-  80007a:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%ebp)
-  800081:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
-  800088:	eb 0a                	jmp    800094 <main+0x20>
-  80008a:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  80008d:	01 45 f8             	add    %eax,-0x8(%ebp)
-  800090:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  800094:	83 7d fc 64          	cmpl   $0x64,-0x4(%ebp)
-  800098:	7e f0                	jle    80008a <main+0x16>
-  80009a:	b8 00 00 00 00       	mov    $0x0,%eax
-  80009f:	c9                   	leave  
-  8000a0:	c3                   	ret    
+08048074 <main>:
+ 8048074:	55                   	push   %ebp
+ 8048075:	89 e5                	mov    %esp,%ebp
+ 8048077:	83 ec 10             	sub    $0x10,%esp
+ 804807a:	c7 45 fc 01 00 00 00 	movl   $0x1,-0x4(%ebp)
+ 8048081:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+ 8048088:	eb 0a                	jmp    8048094 <main+0x20>
+ 804808a:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 804808d:	01 45 f8             	add    %eax,-0x8(%ebp)
+ 8048090:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 8048094:	83 7d fc 64          	cmpl   $0x64,-0x4(%ebp)
+ 8048098:	7e f0                	jle    804808a <main+0x16>
+ 804809a:	b8 00 00 00 00       	mov    $0x0,%eax
+ 804809f:	c9                   	leave  
+ 80480a0:	c3                   	ret    

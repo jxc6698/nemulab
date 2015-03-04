@@ -28,11 +28,45 @@ static make_helper(handle_0f)
 	uint8_t op = instr_fetch(eip+1, 1);
 	switch (op) {
 		case 0x01:
-			return lgdt(eip);
+			return lgdtidt(eip);
 		case 0x20:
 			return mov_cr2rl(eip);
 		case 0x22:
 			return mov_rl2cr(eip);
+		case 0x40:
+			return cmovo_rmv(eip);
+		case 0x41:
+			return cmovno_rmv(eip);
+		case 0x42:
+			return cmovb_rmv(eip);
+		case 0x43:
+			return cmovae_rmv(eip);
+		case 0x44:
+			return cmove_rmv(eip);
+		case 0x45:
+			return cmovne_rmv(eip);
+		case 0x46:
+			return cmovbe_rmv(eip);
+		case 0x47:
+			return cmova_rmv(eip);
+		case 0x48:
+			return cmovs_rmv(eip);
+		case 0x49:
+			return cmovns_rmv(eip);
+		case 0x4a:
+			return cmovp_rmv(eip);
+		case 0x4b:
+			return cmovnp_rmv(eip);
+		case 0x4c:
+			return cmovl_rmv(eip);
+		case 0x4d:
+			return cmovge_rmv(eip);
+		case 0x4e:
+			return cmovle_rmv(eip);
+		case 0x4f:
+			return cmovg_rmv(eip);
+		case 0x80:
+			return jo_relv(eip);
 		case 0x81:
 			return jno_relv(eip);
 		case 0x82:
@@ -383,6 +417,7 @@ static make_helper(handle_f6_opcode)
 		case 0:
 			return test_rm2ib(eip);
 		case 1:
+			assert(0);
 			return 0;
 		case 2:
 			return not_rmb(eip);
@@ -412,9 +447,10 @@ static make_helper(handle_f7_opcode)
 		case 0:
 			return test_rm2iv(eip);
 		case 1:
-			return not_rmv(eip);;
-		case 2:
+			assert(0);
 			return 0;
+		case 2:
+			return not_rmv(eip);;
 		case 3:
 			return neg_rmv(eip);
 		case 4:

@@ -47,11 +47,10 @@ make_helper(test_iv)
 make_helper(test_rm2ib)
 {	
 	ModR_M m;
-
 	m.val = instr_fetch(eip+1, 1);
 	
 	if (m.mod == 3) {
-		uint32_t i8 = instr_fetch(eip+1, 1);
+		uint32_t i8 = instr_fetch(eip+2, 1);
 		uint8_t val = reg_b(m.reg);
 
 		print_asm("testb %%%s,$0x%x", regsb[m.reg], i8);
@@ -80,7 +79,7 @@ make_helper(test_rm2iw)
 	m.val = instr_fetch(eip+1, 1);
 	
 	if (m.mod == 3) {
-		uint32_t i16 = instr_fetch(eip+1, 2);
+		uint32_t i16 = instr_fetch(eip+2, 2);
 		uint16_t val = reg_w(m.reg);
 
 		print_asm("testw %%%s,$0x%x", regsl[m.reg], i16);
@@ -109,7 +108,7 @@ make_helper(test_rm2il)
 	m.val = instr_fetch(eip+1, 1);
 	
 	if (m.mod == 3) {
-		uint32_t i32 = instr_fetch(eip+1, 4);
+		uint32_t i32 = instr_fetch(eip+2, 4);
 		uint32_t val = reg_l(m.reg);
 
 		print_asm("testl %%%s,$0x%x", regsl[m.reg], i32);

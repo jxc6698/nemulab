@@ -7,6 +7,7 @@
 
 /* Use the function to get the start address of user page directory. */
 inline PDE* get_updir();
+inline PDE* get_kpdir();
 
 void create_video_mapping() {
 	/* TODO: create an identical mapping from virtual memory area 
@@ -14,7 +15,10 @@ void create_video_mapping() {
 	 * [0xa0000, 0xa0000 + SCR_SIZE) for user program. You may define
 	 * some page tables to create this mapping.
 	 */
-	nemu_assert(0);
+	PDE *updir = get_updir();
+	PDE *kp = get_kpdir();
+	memcpy(&updir[0], &kp[0], sizeof(PDE));
+//	nemu_assert(0);
 }
 
 void video_mapping_write_test() {

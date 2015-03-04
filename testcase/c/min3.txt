@@ -4,63 +4,63 @@ min3:     file format elf32-i386
 
 Disassembly of section .text:
 
-00800094 <min3>:
-  800094:	55                   	push   %ebp
-  800095:	89 e5                	mov    %esp,%ebp
-  800097:	83 ec 10             	sub    $0x10,%esp
-  80009a:	8b 45 08             	mov    0x8(%ebp),%eax
-  80009d:	3b 45 0c             	cmp    0xc(%ebp),%eax
-  8000a0:	7d 08                	jge    8000aa <min3+0x16>
-  8000a2:	8b 45 08             	mov    0x8(%ebp),%eax
-  8000a5:	89 45 fc             	mov    %eax,-0x4(%ebp)
-  8000a8:	eb 06                	jmp    8000b0 <min3+0x1c>
-  8000aa:	8b 45 0c             	mov    0xc(%ebp),%eax
-  8000ad:	89 45 fc             	mov    %eax,-0x4(%ebp)
-  8000b0:	8b 45 10             	mov    0x10(%ebp),%eax
-  8000b3:	3b 45 fc             	cmp    -0x4(%ebp),%eax
-  8000b6:	7d 06                	jge    8000be <min3+0x2a>
-  8000b8:	8b 45 10             	mov    0x10(%ebp),%eax
-  8000bb:	89 45 fc             	mov    %eax,-0x4(%ebp)
-  8000be:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  8000c1:	c9                   	leave  
-  8000c2:	c3                   	ret    
+08048094 <min3>:
+ 8048094:	55                   	push   %ebp
+ 8048095:	89 e5                	mov    %esp,%ebp
+ 8048097:	83 ec 10             	sub    $0x10,%esp
+ 804809a:	8b 45 08             	mov    0x8(%ebp),%eax
+ 804809d:	3b 45 0c             	cmp    0xc(%ebp),%eax
+ 80480a0:	7d 08                	jge    80480aa <min3+0x16>
+ 80480a2:	8b 45 08             	mov    0x8(%ebp),%eax
+ 80480a5:	89 45 fc             	mov    %eax,-0x4(%ebp)
+ 80480a8:	eb 06                	jmp    80480b0 <min3+0x1c>
+ 80480aa:	8b 45 0c             	mov    0xc(%ebp),%eax
+ 80480ad:	89 45 fc             	mov    %eax,-0x4(%ebp)
+ 80480b0:	8b 45 10             	mov    0x10(%ebp),%eax
+ 80480b3:	3b 45 fc             	cmp    -0x4(%ebp),%eax
+ 80480b6:	7d 06                	jge    80480be <min3+0x2a>
+ 80480b8:	8b 45 10             	mov    0x10(%ebp),%eax
+ 80480bb:	89 45 fc             	mov    %eax,-0x4(%ebp)
+ 80480be:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 80480c1:	c9                   	leave  
+ 80480c2:	c3                   	ret    
 
-008000c3 <main>:
-  8000c3:	55                   	push   %ebp
-  8000c4:	89 e5                	mov    %esp,%ebp
-  8000c6:	83 ec 1c             	sub    $0x1c,%esp
-  8000c9:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
-  8000d0:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
-  8000d7:	eb 65                	jmp    80013e <main+0x7b>
-  8000d9:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
-  8000e0:	eb 50                	jmp    800132 <main+0x6f>
-  8000e2:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
-  8000e9:	eb 3b                	jmp    800126 <main+0x63>
-  8000eb:	8b 45 f4             	mov    -0xc(%ebp),%eax
-  8000ee:	8b 0c 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%ecx
-  8000f5:	8b 45 f8             	mov    -0x8(%ebp),%eax
-  8000f8:	8b 14 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%edx
-  8000ff:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  800102:	8b 04 85 c0 11 80 00 	mov    0x8011c0(,%eax,4),%eax
-  800109:	89 4c 24 08          	mov    %ecx,0x8(%esp)
-  80010d:	89 54 24 04          	mov    %edx,0x4(%esp)
-  800111:	89 04 24             	mov    %eax,(%esp)
-  800114:	e8 7b ff ff ff       	call   800094 <min3>
-  800119:	8b 45 f0             	mov    -0x10(%ebp),%eax
-  80011c:	83 c0 01             	add    $0x1,%eax
-  80011f:	89 45 f0             	mov    %eax,-0x10(%ebp)
-  800122:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
-  800126:	8b 45 f4             	mov    -0xc(%ebp),%eax
-  800129:	83 f8 07             	cmp    $0x7,%eax
-  80012c:	76 bd                	jbe    8000eb <main+0x28>
-  80012e:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
-  800132:	8b 45 f8             	mov    -0x8(%ebp),%eax
-  800135:	83 f8 07             	cmp    $0x7,%eax
-  800138:	76 a8                	jbe    8000e2 <main+0x1f>
-  80013a:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
-  80013e:	8b 45 fc             	mov    -0x4(%ebp),%eax
-  800141:	83 f8 07             	cmp    $0x7,%eax
-  800144:	76 93                	jbe    8000d9 <main+0x16>
-  800146:	b8 00 00 00 00       	mov    $0x0,%eax
-  80014b:	c9                   	leave  
-  80014c:	c3                   	ret    
+080480c3 <main>:
+ 80480c3:	55                   	push   %ebp
+ 80480c4:	89 e5                	mov    %esp,%ebp
+ 80480c6:	83 ec 1c             	sub    $0x1c,%esp
+ 80480c9:	c7 45 f0 00 00 00 00 	movl   $0x0,-0x10(%ebp)
+ 80480d0:	c7 45 fc 00 00 00 00 	movl   $0x0,-0x4(%ebp)
+ 80480d7:	eb 65                	jmp    804813e <main+0x7b>
+ 80480d9:	c7 45 f8 00 00 00 00 	movl   $0x0,-0x8(%ebp)
+ 80480e0:	eb 50                	jmp    8048132 <main+0x6f>
+ 80480e2:	c7 45 f4 00 00 00 00 	movl   $0x0,-0xc(%ebp)
+ 80480e9:	eb 3b                	jmp    8048126 <main+0x63>
+ 80480eb:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 80480ee:	8b 0c 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%ecx
+ 80480f5:	8b 45 f8             	mov    -0x8(%ebp),%eax
+ 80480f8:	8b 14 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%edx
+ 80480ff:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 8048102:	8b 04 85 c0 91 04 08 	mov    0x80491c0(,%eax,4),%eax
+ 8048109:	89 4c 24 08          	mov    %ecx,0x8(%esp)
+ 804810d:	89 54 24 04          	mov    %edx,0x4(%esp)
+ 8048111:	89 04 24             	mov    %eax,(%esp)
+ 8048114:	e8 7b ff ff ff       	call   8048094 <min3>
+ 8048119:	8b 45 f0             	mov    -0x10(%ebp),%eax
+ 804811c:	83 c0 01             	add    $0x1,%eax
+ 804811f:	89 45 f0             	mov    %eax,-0x10(%ebp)
+ 8048122:	83 45 f4 01          	addl   $0x1,-0xc(%ebp)
+ 8048126:	8b 45 f4             	mov    -0xc(%ebp),%eax
+ 8048129:	83 f8 07             	cmp    $0x7,%eax
+ 804812c:	76 bd                	jbe    80480eb <main+0x28>
+ 804812e:	83 45 f8 01          	addl   $0x1,-0x8(%ebp)
+ 8048132:	8b 45 f8             	mov    -0x8(%ebp),%eax
+ 8048135:	83 f8 07             	cmp    $0x7,%eax
+ 8048138:	76 a8                	jbe    80480e2 <main+0x1f>
+ 804813a:	83 45 fc 01          	addl   $0x1,-0x4(%ebp)
+ 804813e:	8b 45 fc             	mov    -0x4(%ebp),%eax
+ 8048141:	83 f8 07             	cmp    $0x7,%eax
+ 8048144:	76 93                	jbe    80480d9 <main+0x16>
+ 8048146:	b8 00 00 00 00       	mov    $0x0,%eax
+ 804814b:	c9                   	leave  
+ 804814c:	c3                   	ret    

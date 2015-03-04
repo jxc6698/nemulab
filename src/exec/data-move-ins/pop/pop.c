@@ -58,7 +58,7 @@ make_helper(pop_rl)
 	int reg = instr_fetch(eip, 1) & 0x07;
 	reg_l(reg) = swaddr_read(cpu.esp, 4);
 	cpu.esp += 4;
-	print_asm("popw %%%s", regsl[reg]);
+	print_asm("popl %%%s", regsl[reg]);
 
 	return 1;
 }
@@ -103,9 +103,9 @@ make_helper(pop_a)
 	int i;
 	for (i=7;i>=0;i--) {
 		reg_w(i) = swaddr_read(cpu.esp, 2);
-		cpu.esp -= 2;
+		cpu.esp += 2;
 	}
-	return 1;
+	print_asm("popa");
 
 	return 1;
 }
@@ -115,8 +115,10 @@ make_helper(pop_ad)
 	int i;
 	for (i=7;i>=0;i--) {
 		reg_l(i) = swaddr_read(cpu.esp, 4);
-		cpu.esp -= 4;
+		cpu.esp += 4;
 	}
+	print_asm("popad");
+
 	return 1;
 }
 
@@ -128,14 +130,18 @@ make_helper(pop_av)
 make_helper(pop_f)
 {
 	set_flags(cpu, swaddr_read(cpu.esp, 2));
-	cpu.esp -= 2;
+	cpu.esp += 2;
+	print_asm("popf");
+
 	return 1;
 }
 
 make_helper(pop_fd)
 {
 	set_eflags(cpu, swaddr_read(cpu.esp, 4));
-	cpu.esp -= 4;
+	cpu.esp += 4;
+	print_asm("popfd");
+
 	return 1;
 }
 

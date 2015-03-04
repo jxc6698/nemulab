@@ -176,31 +176,50 @@ make_helper(mov_cr2rl)
 {
 	ModR_M m;
 	m.val = instr_fetch(eip+2, 1);
-	switch(m.R_M) {
+	switch(m.reg) {
 		case 0:
-			reg_l(m.reg) = cpu.cr0.val;
+			reg_l(m.R_M) = cpu.cr0.val;
+			break;
+		case 3:
+			reg_l(m.R_M) = cpu.cr3.val;
 			break;
 		default:
 			printf("mov crx to reg \n");
 			assert(0);
 	}
-	print_asm("mov %%cr%d, %%%s\n", m.R_M, regsl[m.reg]);
+	print_asm("mov %%cr%d, %%%s", m.reg, regsl[m.R_M]);
 	return 3;
+}
+
+uint32_t hwaddr_read(hwaddr_t, uint32_t);
+void testcr3() 
+{
+	int i=0;
+	uint32_t val;
+	for (i=0;i<128;i++) {
+		val = hwaddr_read(cpu.cr3.val+ 4*i, 4);
+		if (val&0x01)
+			printf("index %d present\n", i);
+	}
 }
 
 make_helper(mov_rl2cr)
 {
 	ModR_M m;
 	m.val = instr_fetch(eip+2, 1);
-	switch(m.R_M) {
+	switch(m.reg) {
 		case 0:
-			cpu.cr0.val = reg_l(m.reg);
+			cpu.cr0.val = reg_l(m.R_M);
+			break;
+		case 3:
+			cpu.cr3.val = reg_l(m.R_M);
+//			testcr3();
 			break;
 		default:
 			printf("mov crx to reg \n");
 			assert(0);
 	}
-	print_asm("mov %%%s, %%cr%d\n", regsl[m.reg], m.R_M);
+	print_asm("mov %%%s, %%cr%d", regsl[m.R_M], m.reg);
 	return 3;
 }
 

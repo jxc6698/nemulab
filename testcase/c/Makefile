@@ -2,7 +2,9 @@ CC      = gcc
 LD		= ld
 CFLAGS  = -m32 -Wall -Werror -static -I.. -fno-stack-protector
 #LDFLAGS = -melf_i386 -e main -T ../link.lds
-LDFLAGS = -melf_i386 -e main -Ttext-segment=0x800000
+# comment it when open page 
+#LDFLAGS = -melf_i386 -e main -Ttext-segment=0x800000
+LDFLAGS = -melf_i386 -e main
 
 SRCS = $(shell ls *.c)
 OBJS = $(SRCS:.c=)

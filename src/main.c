@@ -10,6 +10,8 @@ void init_regex();
 void init_signal();
 void reg_test();
 void list_sym();
+void init_device();
+void init_sdl();
 
 int enable_debug = false;
 int quiet = false;
@@ -46,6 +48,10 @@ int main(int argc, char *argv[]) {
 	
 	/* Test whether the 'CPU_state' structure is organized correctly. */
 	reg_test();
+
+	/* lab 4 */
+//	init_device();
+//	init_sdl();
 
 	main_loop();
 
